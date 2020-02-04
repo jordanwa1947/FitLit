@@ -11,9 +11,9 @@ class UserRepository {
       return new User(data);
     })
   }
-  // getUserData() {
-  //
-  // }
+  getUserData(id) {
+    return this.users.find(user => user.id === id);
+  }
 }
 
 if (typeof module !== 'undefined') {
