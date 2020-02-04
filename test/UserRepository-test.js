@@ -51,7 +51,7 @@ describe('UserRepository', function() {
   });
 
   it('should return a user\'s data based on their id', function() {
-
+    expect(userRepository.getUserData(2)).to.deep.equal(users[1]);
   })
 
 
