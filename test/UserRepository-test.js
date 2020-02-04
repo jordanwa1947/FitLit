@@ -44,7 +44,7 @@ describe('UserRepository', function() {
 
   it('should create an array of users', function() {
     expect(Array.isArray(userRepository.users)).to.equal(true);
-  })
+  });
 
   it('should have user objects in the array', function() {
     expect(userRepository.users[0]).to.be.an.instanceOf(User);
@@ -52,8 +52,10 @@ describe('UserRepository', function() {
 
   it('should return a user\'s data based on their id', function() {
     expect(userRepository.getUserData(2)).to.deep.equal(users[1]);
-  })
+  });
 
-
+  it('should calculate the average step goal amongst all users', function() {
+    expect(userRepository.calculateAvgStepGoalOfUsers()).to.equal(7500);
+  });
 
 });
