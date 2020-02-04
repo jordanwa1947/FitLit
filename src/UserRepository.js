@@ -11,7 +11,6 @@ class UserRepository {
       return new User(data);
     })
   }
-
   // getUserData() {
   //
   // }
