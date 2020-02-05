@@ -109,4 +109,8 @@ describe('Sleep', function() {
     expect(sleep.findAvergeForAUserOverAWeek('2019/06/15', 'hoursSlept')).to.equal(7.8375);
   });
 
+  it('should be able to find the average sleep quality over a week', function() {
+    expect(sleep.findAvergeForAUserOverAWeek('2019/06/15', 'sleepQuality')).to.equal(4.6375);
+  });
+
 });
