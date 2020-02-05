@@ -14,6 +14,18 @@ class Sleep {
     });
     return hoursSlept / numberOfRecords || 0;
   }
+
+  findAvergeSleepQualityForAUser(id) {
+    let sleepQualitySum = 0;
+    let numberOfRecords = 0;
+    this.sleepData.forEach((data) => {
+      if(data.userID === id) {
+        sleepQualitySum += data.sleepQuality;
+        numberOfRecords++;
+      }
+    });
+    return sleepQualitySum / numberOfRecords || 0;
+  }
 }
 
 module.exports = Sleep;
