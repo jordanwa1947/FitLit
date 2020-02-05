@@ -12,6 +12,16 @@ class Hydration {
     }, 0)
     return totalHydration / hydrationPerUser.length;
   }
+
+  displayFluidOuncesConsumed(id, date) {
+    let hydrationPerUser = this.hydrationData.filter(hydration => {
+      return hydration.userID === id;
+    })
+    let hydrationPerDate = hydrationPerUser.find(hydrationDate => {
+      return hydrationDate.date === date;
+    })
+    return hydrationPerDate.numOunces;
+  }
 }
 
 
