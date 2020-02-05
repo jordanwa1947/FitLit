@@ -33,11 +33,11 @@ describe('Sleep', function() {
   });
 
   it('should be able to calculate the average sleep for a user', function() {
-    expect(sleep.findAvergeSleepForAUser(2)).to.equal(8.9);
+    expect(sleep.findAverge(2, 'hoursSlept')).to.equal(8.9);
   });
 
   it('should be able to calculate the average sleep quality for a user', function() {
-    expect(sleep.findAvergeSleepQualityForAUser(2)).to.equal(5.2);
+    expect(sleep.findAverge(2, 'sleepQuality')).to.equal(5.2);
   });
 
 });

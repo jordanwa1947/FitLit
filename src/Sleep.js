@@ -3,28 +3,16 @@ class Sleep {
     this.sleepData = sleepData;
   }
 
-  findAvergeSleepForAUser(id) {
-    let hoursSlept = 0;
+  findAverge(id, field) {
+    let sum = 0;
     let numberOfRecords = 0;
     this.sleepData.forEach((data) => {
       if(data.userID === id) {
-        hoursSlept += data.hoursSlept;
+        sum += data[field];
         numberOfRecords++;
       }
     });
-    return hoursSlept / numberOfRecords || 0;
-  }
-
-  findAvergeSleepQualityForAUser(id) {
-    let sleepQualitySum = 0;
-    let numberOfRecords = 0;
-    this.sleepData.forEach((data) => {
-      if(data.userID === id) {
-        sleepQualitySum += data.sleepQuality;
-        numberOfRecords++;
-      }
-    });
-    return sleepQualitySum / numberOfRecords || 0;
+    return sum / numberOfRecords || 0;
   }
 }
 
