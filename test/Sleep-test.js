@@ -44,4 +44,8 @@ describe('Sleep', function() {
     expect(sleep.returnSleepDataField(2, '2019/06/16', 'hoursSlept')).to.equal(10.8);
   });
 
+  it('should be able to find the sleep quality on a certain date for a user', function() {
+    expect(sleep.returnSleepDataField(2, '2019/06/16', 'sleepQuality')).to.equal(5.7);
+  });
+
 });
