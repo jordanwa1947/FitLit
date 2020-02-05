@@ -1,10 +1,90 @@
 /* GENERAL STYLING */
 * {
+  /* background: cornflowerblue; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 /* STYLING FOR HEADER */
+header {
+  background: #fff;
+  height: 20vh;
+}
 
 /* STYLIING FOR MAIN */
+main {
+  border: 2px solid red;
+	display: grid;
+	grid-template-columns: .10fr 1fr 1fr 1fr;
+	grid-template-rows: .10fr 1fr 1fr 1fr;
+	grid-template-areas:
+		" . h2-1 h2-2 ."
+		"h3-1 sec-1 sec-2 aside"
+		"h3-2 sec-3 sec-4 aside"
+		"h3-3 sec-5 sec-6 aside";
+	height: 80vh;
+	grid-gap: 20px;
+  padding: 0 2%;
+}
+
+.header-today {
+	grid-area: h2-1;
+}
+
+.header-this-week {
+	grid-area: h2-2;
+}
+
+.activity-section-1 {
+  background: gray;
+	grid-area: sec-1;
+}
+
+.activity-section-2 {
+  background: gray;
+	grid-area: sec-2;
+}
+
+.hydration-section-1 {
+  background: gray;
+	grid-area: sec-3;
+}
+
+.hydration-section-2 {
+  background: gray;
+	grid-area: sec-4;
+}
+
+.sleep-sectoin-1 {
+  background: gray;
+	grid-area: sec-5;
+}
+
+.sleep-section-2{
+  background: gray;
+	grid-area: sec-6;
+}
+
+aside {
+	background: gray;
+	grid-area: aside;
+}
+
+.header-activity {
+	grid-area: h3-1;
+	transform: rotate(270deg);
+	margin-top: 100px;
+}
+
+.header-hydration {
+	transform: rotate(270deg);
+	margin-top: 100px;
+	grid-area: h3-2;
+}
+
+.header-sleep {
+	transform: rotate(270deg);
+	margin-top: 100px;
+	grid-area: h3-3;
+}
