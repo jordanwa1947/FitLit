@@ -22,7 +22,7 @@ beforeEach(()=> {
     "userID": 2,
     "date": "2019/06/16",
     "hoursSlept": 10.8,
-    "sleepQuality": 4.7
+    "sleepQuality": 5.7
   }];
   sleep = new Sleep(sleepData);
 })
@@ -34,6 +34,10 @@ describe('Sleep', function() {
 
   it('should be able to calculate the average sleep for a user', function() {
     expect(sleep.findAvergeSleepForAUser(2)).to.equal(8.9);
-  })
+  });
+
+  it('should be able to calculate the average sleep quality for a user', function() {
+    expect(sleep.findAvergeSleepQualityForAUser(2)).to.equal(5.2);
+  });
 
 });
