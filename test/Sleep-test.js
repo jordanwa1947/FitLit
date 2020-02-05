@@ -9,7 +9,7 @@ beforeEach(()=> {
   sleepData = [{
     "userID": 1,
     "date": "2019/06/15",
-    "hoursSlept": 6.1,
+    "hoursSlept": 8.1,
     "sleepQuality": 2.2
   },
   {
@@ -106,7 +106,7 @@ describe('Sleep', function() {
   });
 
   it('should be able to find the average hours slept over a week', function() {
-    expect(sleep.findAverageForAUserOverAWeek('2019/06/15', 'hoursSlept')).to.equal(7.8375);
+    expect(sleep.findAverageForAUserOverAWeek('2019/06/15', 'hoursSlept')).to.equal(8.0875);
   });
 
   it('should be able to find the average sleep quality over a week', function() {
@@ -138,5 +138,29 @@ describe('Sleep', function() {
     }]
     expect(sleep.findUsersWithAvgGreaterThanThree(users, 'sleepQuality', '2019/06/15')).to.deep.equal([users[1]]);
   });
+
+  it('should be able to find all records for a date', function() {
+    expect(sleep.findAllRecordsByDate('2019/06/15')).to.deep.equal([{
+      "userID": 1,
+      "date": "2019/06/15",
+      "hoursSlept": 8.1,
+      "sleepQuality": 2.2
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/15",
+      "hoursSlept": 7,
+      "sleepQuality": 4.7
+    }]);
+  })
+
+  it('should be able find the user/s with the most sleep for a given date', function() {
+    expect(sleep.findTheUserWithTheMostSleep('2019/06/15')).to.deep.equal([{
+      "userID": 1,
+      "date": "2019/06/15",
+      "hoursSlept": 8.1,
+      "sleepQuality": 2.2
+    }]);
+  })
 
 });
