@@ -62,5 +62,9 @@ describe('Hydration', function() {
     expect(hydration).to.be.an.instanceOf(Hydration);
   });
 
-  it()
+  it('should calculate the average fluid ounces consumed per day for all time per user', function() {
+  expect(hydration.calcAvgOuncesConsuedForAllTime(1)).to .equal(53);
+  expect(hydration.calcAvgOuncesConsuedForAllTime(2)).to.equal(83);
+  });
+
 });
