@@ -67,4 +67,9 @@ describe('Hydration', function() {
   expect(hydration.calcAvgOuncesConsuedForAllTime(2)).to.equal(83);
   });
 
+  it('should retun the amount fluid ounces consumed for a specific date', function() {
+    expect(hydration.displayFluidOuncesConsumed(1, "2019/06/16")).to.equal(69);
+    expect(hydration.displayFluidOuncesConsumed(2, "2019/06/16")).to.equal(91);
+  })
+
 });
