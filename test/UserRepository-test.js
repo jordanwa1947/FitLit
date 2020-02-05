@@ -6,7 +6,7 @@ const User = require('../src/User');
 
 describe('UserRepository', function() {
 
-  let userRepository, user;
+  let userRepository, users;
   beforeEach(function() {
     users = [{
       "id": 1,
