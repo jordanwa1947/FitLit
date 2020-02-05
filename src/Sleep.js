@@ -9,7 +9,7 @@ class Sleep {
     });
   }
 
-  findAverge(records, field) {
+  findAverage(records, field) {
     const sum = records.reduce((sum, data) => {
       return sum + data[field]
     }, 0);
@@ -20,9 +20,13 @@ class Sleep {
     return this.findUserSleepData(id, date)[field];
   }
 
-  findAvergeForAUser(id, field) {
+  findAverageForAUser(id, field) {
     const records = this.sleepData.filter((data) => data.userID === id);
-    return this.findAverge(records, field);
+    return this.findAverage(records, field);
+  }
+
+  findAverageForAllUsers(field) {
+    return this.findAverage(this.sleepData, field);
   }
 
   findSleepDataForAGivenWeek(date) {
@@ -32,12 +36,12 @@ class Sleep {
     return this.sleepData.filter((data) => {
       let dataDate = new Date(data.date).getTime();
       return dataDate > lastWeek && dataDate <= currentDate;
-    })
+    });
   }
 
-  findAvergeForAUserOverAWeek(date, field) {
+  findAverageForAUserOverAWeek(date, field) {
     var records = this.findSleepDataForAGivenWeek(date);
-    return this.findAverge(records, field);
+    return this.findAverage(records, field);
   }
 }
 
