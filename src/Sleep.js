@@ -24,6 +24,10 @@ class Sleep {
     return records.filter((data) => data.userID === id);
   }
 
+  findAllRecordsByDate(date) {
+    return this.sleepData.filter((data) => data.date === date);
+  }
+
   findAverageForAUser(id, field) {
     const userRecords = this.findAllRecordsForAUser(id, this.sleepData);
     return this.findAverage(userRecords, field);
@@ -54,6 +58,31 @@ class Sleep {
       const userRecords = this.findAllRecordsForAUser(user.id, records)
       return this.findAverage(userRecords, field) > 3;
     });
+  }
+
+  sortRecordsBySleep(records) {
+    return records.sort((a, b) => {
+      if (a.hoursSlept > b.hoursSlept) {
+        return 1;
+      } else if (b.hoursSlept > a.hoursSlept) {
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  findTheUserWithTheMostSleep(date) {
+    const sleepRecords = this.findAllRecordsByDate(date);
+    const sortedRecords = this.sortRecordsBySleep(sleepRecords);
+    const greatest = [];
+    let greatestRecord = sortedRecords[sortedRecords.length - 1];
+    let i = sortedRecords.length - 1;
+    while(sortedRecords[i].hoursSlept === greatestRecord.hoursSlept) {
+      greatest.push(sortedRecords[i])
+      i--;
+    }
+    return greatest;
   }
 }
 
