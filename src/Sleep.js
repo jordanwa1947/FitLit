@@ -75,12 +75,13 @@ class Sleep {
   findTheUserWithTheMostSleep(date) {
     const sleepRecords = this.findAllRecordsByDate(date);
     const sortedRecords = this.sortRecordsBySleep(sleepRecords);
-    const greatest = [];
     let greatestRecord = sortedRecords[sortedRecords.length - 1];
-    let i = sortedRecords.length - 1;
+    const greatest = [greatestRecord];
+    let i = sortedRecords.length - 2;
     while(sortedRecords[i].hoursSlept === greatestRecord.hoursSlept) {
       greatest.push(sortedRecords[i])
       i--;
+      if (!sortedRecords[i]) break;
     }
     return greatest;
   }
