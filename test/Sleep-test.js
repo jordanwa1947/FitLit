@@ -40,4 +40,8 @@ describe('Sleep', function() {
     expect(sleep.findAverge(2, 'sleepQuality')).to.equal(5.2);
   });
 
+  it('should be able to find how many hours a user slept for a certain date', function() {
+    expect(sleep.returnSleepDataField(2, '2019/06/16', 'hoursSlept')).to.equal(10.8);
+  });
+
 });
