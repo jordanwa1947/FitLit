@@ -1,9 +1,9 @@
 class Activity {
-  constructor() {
-
+  constructor(activityData) {
+    this.activityData = activityData;
   }
 }
 
 if (typeof module !== 'undefined') {
-  module.exports = Hydration;
+  module.exports = Activity;
 }
