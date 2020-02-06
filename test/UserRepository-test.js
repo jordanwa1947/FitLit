@@ -15,11 +15,7 @@ describe('UserRepository', function() {
       "email": "Diana.Hayes1@hotmail.com",
       "strideLength": 4.3,
       "dailyStepGoal": 10000,
-      "friends": [
-        16,
-        4,
-        8
-      ]
+      "friends": [16,4,8]
     },
     {
       "id": 2,
@@ -28,12 +24,7 @@ describe('UserRepository', function() {
       "email": "Dimitri.Bechtelar11@gmail.com",
       "strideLength": 4.5,
       "dailyStepGoal": 5000,
-      "friends": [
-        9,
-        18,
-        24,
-        19
-      ]
+      "friends": [9,18,24,19]
     }];
     userRepository = new UserRepository(users);
   });
@@ -44,10 +35,6 @@ describe('UserRepository', function() {
 
   it('should create an array of users', function() {
     expect(Array.isArray(userRepository.users)).to.equal(true);
-  });
-
-  it('should have user objects in the array', function() {
-    expect(userRepository.users[0]).to.be.an.instanceOf(User);
   });
 
   it('should return a user\'s data based on their id', function() {

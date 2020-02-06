@@ -1,1 +1,1 @@
-console.log("Hello World");
+const userRepository = new UserRepository(userData);
