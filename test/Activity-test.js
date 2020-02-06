@@ -29,6 +29,10 @@ describe('Activity', function() {
     expect(activity).to.be.an.instanceOf(Activity);
   });
 
+  it.skip('should have a property that takes in an array the activity data of all users', function() {
+
+  });
+
   it.skip('should return the number of miles a user walked for a specific day based on on their number of steps', function() {
 
   });
