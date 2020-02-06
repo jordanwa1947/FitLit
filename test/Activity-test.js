@@ -2,10 +2,30 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Activity = require('../src/Activity');
+let activityData, activity;
+
+beforeEach(() => {
+  activityData = [
+    {
+      "userID": 4,
+      "date": "2019/06/15",
+      "numSteps": 3486,
+      "minutesActive": 114,
+      "flightsOfStairs": 32
+    },
+    {
+      "userID": 5,
+      "date": "2019/06/15",
+      "numSteps": 11374,
+      "minutesActive": 213,
+      "flightsOfStairs": 13
+    }
+  ];
+  activity = new Activity(activityData);
+});
 
 describe('Activity', function() {
   it('should be a function', function() {
-    const activity = new Activity();
     expect(activity).to.be.an.instanceOf(Activity);
   });
 
