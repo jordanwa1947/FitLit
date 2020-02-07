@@ -1,5 +1,7 @@
 const userRepository = new UserRepository(userData);
+const currentUser = userRepository.users[0];
 insertUserInfo();
+insertHydrationData();
 
 function insertUserInfo() {
   const user = new User(userRepository.users[0]);
@@ -11,4 +13,11 @@ function insertUserInfo() {
   document.getElementById('user-stride-length').innerText = `Stride Length: ${user.strideLength}`;
   document.getElementById('daily-step-goal').innerText = `Step Goal: ${user.dailyStepGoal}`;
   document.getElementById('avg-step-goal').innerText = `Average Step Goal: ${userRepository.calculateAvgStepGoalOfUsers()}`;
+}
+
+function insertHydrationData() {
+  const waterConsumed = document.getElementById('water-consumed');
+  const waterOverAWeek = document.getElementById('water-over-a-week');
+  const hydration = new Hydration(hydrationData);
+  waterConsumed.innerHTML = `<p>${hydration.displayFluidOuncesConsumed(currentUser.id, "2019/06/15")}</p>`
 }
