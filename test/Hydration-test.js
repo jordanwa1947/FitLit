@@ -35,8 +35,8 @@ describe('Hydration', function() {
   });
 
   it('should calculate the average fluid ounces consumed per day for all time per user', function() {
-  expect(hydration.calcAvgOuncesConsuedForAllTime(1)).to .equal(53);
-  expect(hydration.calcAvgOuncesConsuedForAllTime(2)).to.equal(83);
+    expect(hydration.calcAvgOuncesConsumedForAllTime(1)).to .equal(53);
+    expect(hydration.calcAvgOuncesConsumedForAllTime(2)).to.equal(83);
   });
 
   it('should retun the amount fluid ounces consumed for a specific date', function() {

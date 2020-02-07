@@ -37,23 +37,23 @@ class Sleep {
     return this.findAverage(this.sleepData, field);
   }
 
-  findSleepDataForAGivenWeek(date) {
+  findDataForAGivenWeek(date, records) {
     let currentDate = new Date(date).getTime();
     const weekInMilliseconds = 604800000;
     const lastWeek = currentDate - weekInMilliseconds;
-    return this.sleepData.filter((data) => {
+    return records.filter((data) => {
       let dataDate = new Date(data.date).getTime();
       return dataDate > lastWeek && dataDate <= currentDate;
     });
   }
 
   findAverageForAUserOverAWeek(date, field) {
-    var records = this.findSleepDataForAGivenWeek(date);
+    var records = this.findDataForAGivenWeek(date, this.sleepData);
     return this.findAverage(records, field);
   };
 
   findUsersWithAvgGreaterThanThree(users, field, date) {
-    const records = this.findSleepDataForAGivenWeek(date);
+    const records = this.findDataForAGivenWeek(date, this.sleepData);
     return users.filter((user) => {
       const userRecords = this.findAllRecordsForAUser(user.id, records)
       return this.findAverage(userRecords, field) > 3;

@@ -107,7 +107,7 @@ describe('Sleep', function() {
   });
 
   it('should be able to find all of the user sleep records for week', function() {
-    const usersWithinAGivenWeek = sleep.findSleepDataForAGivenWeek('2019/06/15');
+    const usersWithinAGivenWeek = sleep.findDataForAGivenWeek('2019/06/15', sleepData);
     expect(usersWithinAGivenWeek.length).to.equal(8);
   });
 
