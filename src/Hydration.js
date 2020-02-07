@@ -34,6 +34,11 @@ class Hydration {
       return dataDate > lastWeek && dataDate <= currentDate;
     });
   }
+
+  findHydrationDataForAWeek(id, date) {
+    const hydrationForAUser = this.findDataForAUser(id);
+    return this.findDataForAGivenWeek(date, hydrationForAUser);
+  }
 }
 
 

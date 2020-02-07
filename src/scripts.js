@@ -15,9 +15,16 @@ function insertUserInfo() {
   document.getElementById('avg-step-goal').innerText = `Average Step Goal: ${userRepository.calculateAvgStepGoalOfUsers()}`;
 }
 
+function formatDataForAWeek(sleepRecords) {
+  return sleepRecords.map(record => record.numOunces);
+}
+
 function insertHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
   const waterOverAWeek = document.getElementById('water-over-a-week');
   const hydration = new Hydration(hydrationData);
-  waterConsumed.innerHTML = `<p>${hydration.displayFluidOuncesConsumed(currentUser.id, "2019/06/15")}</p>`
+  const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, "2019/09/22");
+  const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, "2019/09/22")
+  waterConsumed.innerHTML = `<p>${todaysHydrationData}</p>`
+  waterOverAWeek.innerHTML = `<p>${formatDataForAWeek(hydrationDataForAWeek)}</p>`
 }
