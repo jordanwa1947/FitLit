@@ -3,10 +3,14 @@ class Hydration {
     this.hydrationData = hydrationData;
   }
 
-  calcAvgOuncesConsuedForAllTime(id) {
-    let hydrationPerUser = this.hydrationData.filter(hydration => {
+  findDataForAUser(id) {
+    return this.hydrationData.filter(hydration => {
       return hydration.userID === id;
     });
+  }
+
+  calcAvgOuncesConsumedForAllTime(id) {
+    const hydrationPerUser = this.findDataForAUser(id);
     let totalHydration = hydrationPerUser.reduce((acc, hydration) => {
       return acc + hydration.numOunces
     }, 0)
@@ -14,13 +18,21 @@ class Hydration {
   }
 
   displayFluidOuncesConsumed(id, date) {
-    let hydrationPerUser = this.hydrationData.filter(hydration => {
-      return hydration.userID === id;
-    })
+    let hydrationPerUser = this.findDataForAUser(id)
     let hydrationPerDate = hydrationPerUser.find(hydrationDate => {
       return hydrationDate.date === date;
     })
     return hydrationPerDate.numOunces;
+  }
+
+  findDataForAGivenWeek(date, records) {
+    let currentDate = new Date(date).getTime();
+    const weekInMilliseconds = 604800000;
+    const lastWeek = currentDate - weekInMilliseconds;
+    return records.filter((data) => {
+      let dataDate = new Date(data.date).getTime();
+      return dataDate > lastWeek && dataDate <= currentDate;
+    });
   }
 }
 
