@@ -16,8 +16,19 @@ function insertUserInfo() {
   document.getElementById('avg-step-goal').innerText = `Average Step Goal: ${userRepository.calculateAvgStepGoalOfUsers()}`;
 }
 
-function formatDataForAWeek(sleepRecords) {
-  return sleepRecords.map(record => record.numOunces);
+function formatHydrationDataForAWeek(records) {
+  return records.map(record => record.numOunces);
+}
+
+function formatSleepDataForAWeek(sleepRecords) {
+  return sleepRecords.reduce((string, record) => {
+    string += `<p>${record.date}</p>`
+    string += `<p>
+                  Hours Slept: ${record.hoursSlept}
+                  Quality: ${record.sleepQuality}
+               </p>`
+    return string;
+  }, ``);
 }
 
 function insertHydrationData() {
@@ -27,7 +38,7 @@ function insertHydrationData() {
   const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
   const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
   waterConsumed.innerHTML = `<p>Ounces Drank: ${todaysHydrationData}</p>`
-  waterOverAWeek.innerHTML = `<p>Ounces For Each Day: ${formatDataForAWeek(hydrationDataForAWeek)}</p>`
+  waterOverAWeek.innerHTML = `<p>Ounces For Each Day: ${formatHydrationDataForAWeek(hydrationDataForAWeek)}</p>`
 }
 
 function insertSleepData() {
@@ -35,6 +46,8 @@ function insertSleepData() {
   const sleepOverAWeekBox = document.getElementById('sleep-data-over-a-week');
   const sleep = new Sleep(sleepData);
   const userSleepData = sleep.findUserSleepData(currentUser.id, '2019/09/22');
+  const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
   sleepDataBox.innerHTML = `<p>Hours Slept: ${userSleepData.hoursSlept}</p>
   <p>Sleep Quality: ${userSleepData.sleepQuality}</p>`
+  sleepOverAWeekBox.innerHTML = formatSleepDataForAWeek(sleepDataForAWeek);
 }

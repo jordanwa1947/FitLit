@@ -85,6 +85,11 @@ class Sleep {
     }
     return greatest;
   }
+
+  findSleepDataForAWeek(id, date) {
+    const sleepForAUser = this.findAllRecordsForAUser(id, this.sleepData);
+    return this.findDataForAGivenWeek(date, sleepForAUser);
+  }
 }
 
 if (typeof module !== 'undefined') {
