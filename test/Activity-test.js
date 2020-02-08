@@ -69,8 +69,9 @@ describe('Activity', function() {
     expect(activity.getMilesWalkedForDay(5, "2019/06/15", 3.1)).to.equal(6.7);
   });
 
-  it.skip('should return how many minutes a user was active for a given day, specified by the date', function() {
-
+  it('should return how many minutes a user was active for a given day, specified by the date', function() {
+    expect(activity.getMinutesActive(4, "2019/06/15")).to.equal(114);
+    expect(activity.getMinutesActive(5, "2019/06/15")).to.equal(213);
   });
 
   it.skip('should return the average number of active minutes for a given week', function() {
