@@ -65,8 +65,8 @@ describe('Activity', function() {
   });
 
   it('should return the number of miles a user walked for a specific day based on on their number of steps', function() {
-    expect(activity.getMilesWalkedForDay(activityData[0], user[0])).to.equal(2.0);
-    expect(activity.getMilesWalkedForDay(activityData[1], user[1])).to.equal(6.7);
+    expect(activity.getMilesWalkedForDay(4, "2019/06/15", 3.1)).to.equal(2.0);
+    expect(activity.getMilesWalkedForDay(5, "2019/06/15", 3.1)).to.equal(6.7);
   });
 
   it.skip('should return how many minutes a user was active for a given day, specified by the date', function() {
