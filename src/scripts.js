@@ -17,7 +17,11 @@ function insertUserInfo() {
 }
 
 function formatHydrationDataForAWeek(records) {
-  return records.map(record => record.numOunces);
+  return records.reduce((string, record) => {
+    string += `<p>${record.date}</p>`
+    string += `<p>${record.numOunces}</p>`
+    return string;
+  }, '');
 }
 
 function formatSleepDataForAWeek(sleepRecords) {
@@ -28,7 +32,7 @@ function formatSleepDataForAWeek(sleepRecords) {
                   Quality: ${record.sleepQuality}
                </p>`
     return string;
-  }, ``);
+  }, '');
 }
 
 function insertHydrationData() {
