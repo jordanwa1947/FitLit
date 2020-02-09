@@ -56,7 +56,7 @@ function formatGeneralActivityData() {
           <p>Steps Taken Today: ${stepsTakenForDay}</p>`;
 }
 
-function formatActivityDataForWeek() {
+function formatCommunityActivity() {
   const activity = new Activity(activityData);
   const averageStepsTakenForAllUsers = activity.findAverageStepsTakenForDay('2019/09/22');
   const averageMinutesActiveForAllUsers = activity.findAverageMinutesActiveForDay('2019/09/22');
@@ -86,6 +86,8 @@ function insertSleepData() {
 function insertActivityData() {
   const activitiesBox = document.querySelector('#activities');
   const activitiesForWeekBox = document.querySelector('#activities-over-week');
+  const activityComparisonForCommunity = document.querySelector('#activity-community-comparison');
   activitiesBox.innerHTML = formatGeneralActivityData();
-  activitiesForWeekBox.innerHTML = formatActivityDataForWeek();
+  // activitiesForWeekBox.innerHTML = formatActivityDataForWeek();
+  activityComparisonForCommunity.innerHTML = formatCommunityActivity();
 }
