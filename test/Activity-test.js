@@ -5,7 +5,7 @@ const Activity = require('../src/Activity');
 const User = require('../src/User');
 const UserRepository = require('../src/UserRepository');
 
-let activityData, activity, users, userRepository;
+let activityData, activity, users;
 
 beforeEach(() => {
   activityData = [
@@ -113,7 +113,6 @@ beforeEach(() => {
     ]
   }];
 
-  userRepository = new UserRepository(users)
 });
 
 describe('Activity', function() {
