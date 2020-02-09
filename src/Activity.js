@@ -12,7 +12,6 @@ class Activity {
 
   findUserActivityByDate(id, date) {
     const activityPerUser = this.findAllUserActivities(id);
-
     const activityPerDate = activityPerUser.find(activity => {
       return activity.date === date;
     });
@@ -25,6 +24,16 @@ class Activity {
 
   getMinutesActive(id, date) {
     return this.findUserActivityByDate(id, date).minutesActive;
+  }
+
+  getStepGoalFeedback(id, date, dailyStepGoal) {
+    if (this.findUserActivityByDate(id, date).numSteps > dailyStepGoal) {
+      return true;
+    }
+
+    if(this.findUserActivityByDate(id, date).numSteps < dailyStepGoal) {
+      return false;
+    }
   }
 
 }
