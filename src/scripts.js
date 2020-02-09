@@ -3,6 +3,7 @@ const currentUser = userRepository.users[0];
 insertUserInfo();
 insertHydrationData();
 insertSleepData();
+insertActivityData();
 
 function insertUserInfo() {
   const user = new User(userRepository.users[0]);
@@ -70,4 +71,10 @@ function formatGeneralActivityData() {
   return `<p>Miles Walked: ${milesWalked}</p>
           <p>Minutes Active: ${minutesActive}</p>
           <p>Step Goal Achieved: ${stepGoalAchieved}</p>`;
+}
+
+function insertActivityData() {
+  const activitiesBox = document.querySelector('#activities');
+  console.log(activitiesBox);
+  activitiesBox.innerHTML = formatGeneralActivityData();
 }
