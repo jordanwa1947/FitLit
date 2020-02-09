@@ -18,6 +18,12 @@ class Activity {
     return activityPerDate;
   }
 
+  findAllUserActivitiesByDate(date) {
+    return this.activityData.filter(activity => {
+      return activity.date === date;
+    });
+  }
+
   getMilesWalkedForDay(id, date, stride) {
     return Number(((this.findUserActivityByDate(id, date).numSteps * stride) / 5280).toFixed(1));
   }
@@ -53,34 +59,24 @@ class Activity {
     return stairClimbingSorted[stairClimbingSorted.length - 1];
   }
 
-  findAllUserActivitiesByDate(date) {
-    return this.activityData.filter(activity => {
-      return activity.date === date;
-    });
+  findAverageForAllUsers(date, metric) {
+    const allUserActivities = this.findAllUserActivitiesByDate(date);
+    const totalSumForMetric = allUserActivities.reduce((acc, activity) => {
+      return acc + activity[metric];
+    }, 0);
+    return Math.round(totalSumForMetric / allUserActivities.length);
   }
 
-  findAverageStairsClimbedForDay(date) {
-    const allUserActivities = this.findAllUserActivitiesByDate(date);
-    const totalStairsClimbed = allUserActivities.reduce((acc, activity) => {
-      return acc + activity.flightsOfStairs;
-    }, 0);
-    return Math.round(totalStairsClimbed / allUserActivities.length);
+  findAverageStairsClimbedForDay(date, metric) {
+    return this.findAverageForAllUsers(date, "flightsOfStairs");
   }
 
   findAverageStepsTakenForDay(date) {
-    const allUserActivities = this.findAllUserActivitiesByDate(date);
-    const totalStepsTaken = allUserActivities.reduce((acc, activity) => {
-      return acc + activity.numSteps;
-    }, 0);
-    return Math.round(totalStepsTaken / allUserActivities.length);
+    return this.findAverageForAllUsers(date, "numSteps");
   }
 
   findAverageMinutesActiveForDay(date) {
-    const allUserActivities = this.findAllUserActivitiesByDate(date);
-    const totalMinutesActive = allUserActivities.reduce((acc, activity) => {
-      return acc + activity.minutesActive;
-    }, 0);
-    return Math.round(totalMinutesActive / allUserActivities.length);
+    return this.findAverageForAllUsers(date, "minutesActive");
   }
 
   findDataForAGivenWeek(date, records) {
