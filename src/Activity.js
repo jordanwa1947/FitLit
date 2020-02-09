@@ -109,6 +109,14 @@ class Activity {
     return this.findAverageMetricForWeek(id, date, "minutesActive");
   }
 
+  findAverageStepsTakenForWeek(id, date) {
+    return this.findAverageMetricForWeek(id, date, "numSteps");
+  }
+
+  findAverageStairsClimbedForWeek(id, date) {
+    return this.findAverageMetricForWeek(id, date, "flightsOfStairs");
+  }
+
 }
 
 
