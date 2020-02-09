@@ -57,7 +57,6 @@ class Activity {
     return this.activityData.filter(activity => {
       return activity.date === date;
     });
-    //Do I needa  return here?
   }
 
   findAverageStairsClimbedForDay(date) {
@@ -82,6 +81,27 @@ class Activity {
       return acc + activity.minutesActive;
     }, 0);
     return Math.round(totalMinutesActive / allUserActivities.length);
+  }
+
+  findDataForAGivenWeek(date, records) {
+    let currentDate = new Date(date).getTime();
+    const weekInMilliseconds = 604800000;
+    const lastWeek = currentDate - weekInMilliseconds;
+    return records.filter((data) => {
+      let dataDate = new Date(data.date).getTime();
+      return dataDate > lastWeek && dataDate <= currentDate;
+    });
+  }
+
+  findAverageMinutesActiveForWeek(id, date) {
+    const activitiesForWeek = this.findDataForAGivenWeek(date, this.activityData);
+    const minutesActiveForWeekByUser = activitiesForWeek.reduce((acc, activity) => {
+      if (activity.userID === id) {
+      return acc + activity.minutesActive;
+      }
+      return acc;
+    }, 0);
+    return Math.round(minutesActiveForWeekByUser / 7);
   }
 }
 
