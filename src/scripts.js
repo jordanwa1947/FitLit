@@ -56,6 +56,16 @@ function formatGeneralActivityData() {
           <p>Steps Taken Today: ${stepsTakenForDay}</p>`;
 }
 
+function formatActivityDataForWeek() {
+  const activity = new Activity(activityData);
+  const averageMinutesActiveForWeek = activity.findAverageMinutesActiveForWeek(currentUser.id, '2019/09/22');
+  const averageStepsTakenForWeek = activity.findAverageStepsTakenForWeek(currentUser.id, '2019/09/22');
+  const averageStairsClimbedForWeek = activity.findAverageStairsClimbedForWeek(currentUser.id, '2019/09/22');
+  return `<p>Average Minutes Active This Week: ${averageMinutesActiveForWeek}</p>
+          <p>Average Steps Taken This Week: ${averageStepsTakenForWeek}</p>
+          <p>Average Stairs Cimbed This Week: ${averageStairsClimbedForWeek}</p>`;
+}
+
 function formatCommunityActivity() {
   const activity = new Activity(activityData);
   const averageStepsTakenForAllUsers = activity.findAverageStepsTakenForDay('2019/09/22');
@@ -88,6 +98,6 @@ function insertActivityData() {
   const activitiesForWeekBox = document.querySelector('#activities-over-week');
   const activityComparisonForCommunity = document.querySelector('#activity-community-comparison');
   activitiesBox.innerHTML = formatGeneralActivityData();
-  // activitiesForWeekBox.innerHTML = formatActivityDataForWeek();
+  activitiesForWeekBox.innerHTML = formatActivityDataForWeek();
   activityComparisonForCommunity.innerHTML = formatCommunityActivity();
 }
