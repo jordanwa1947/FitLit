@@ -61,3 +61,13 @@ function insertSleepData() {
   sleepDataBox.innerHTML = formatGeneralSleepData();
   sleepOverAWeekBox.innerHTML = formatSleepDataForAWeek();
 }
+
+function formatGeneralActivityData() {
+  const activity = new Activity(activityData);
+  const milesWalked = activity.getMilesWalkedForDay(currentUser.id, '2019/09/22', currentUser.strideLength);
+  const minutesActive = activity.getMinutesActive(currentUser.id, '2019/09/22');
+  const stepGoalAchieved = activity.getStepGoalFeedback(currentUser.id, '2019/09/22', currentUser.dailyStepGoal);
+  return `<p>Miles Walked: ${milesWalked}</p>
+          <p>Minutes Active: ${minutesActive}</p>
+          <p>Step Goal Achieved: ${stepGoalAchieved}</p>`;
+}
