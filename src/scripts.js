@@ -46,6 +46,30 @@ function formatGeneralSleepData() {
           <p>Average Sleep Quality: ${avgSleepQuality}</p>`
 }
 
+function formatGeneralActivityData() {
+  const activity = new Activity(activityData);
+  const milesWalked = activity.getMilesWalkedForDay(currentUser.id, '2019/09/22', currentUser.strideLength);
+  const minutesActive = activity.getMinutesActive(currentUser.id, '2019/09/22');
+  const stepGoalAchieved = activity.getStepGoalFeedback(currentUser.id, '2019/09/22', currentUser.dailyStepGoal);
+  return `<p>Miles Walked: ${milesWalked}</p>
+          <p>Minutes Active: ${minutesActive}</p>
+          <p>Step Goal Achieved: ${stepGoalAchieved}</p>`;
+}
+
+function formatActivityDataForWeek() {
+  const activity = new Activity(activityData);
+  const averageMinutesActive = activity.findAverageMinutesActiveForWeek(currentUser.id, '2019/09/22');
+  const daysStepGoalWasExceeded = (activity.getAllDaysStepGoalWasExceeded(currentUser.id, currentUser.dailyStepGoal));
+  const allTimeClimbingRecord = activity.findAllTimeStairClimbingRecord(currentUser.id);
+  return `<p>Average Minutes Active/Day: ${averageMinutesActive}</p>
+          <p>Days You Exceeded Your Step Goal</p>
+          <div class="step-goal-exceeded">
+            <p>${daysStepGoalWasExceeded.join(', ')}</p>
+          </div>
+          <p>All Time Climbing Record:</p>
+          <p>${allTimeClimbingRecord.flightsOfStairs} stairs on ${allTimeClimbingRecord.date}!</p>`
+}
+
 function insertHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
   const waterOverAWeek = document.getElementById('water-over-a-week');
@@ -63,18 +87,9 @@ function insertSleepData() {
   sleepOverAWeekBox.innerHTML = formatSleepDataForAWeek();
 }
 
-function formatGeneralActivityData() {
-  const activity = new Activity(activityData);
-  const milesWalked = activity.getMilesWalkedForDay(currentUser.id, '2019/09/22', currentUser.strideLength);
-  const minutesActive = activity.getMinutesActive(currentUser.id, '2019/09/22');
-  const stepGoalAchieved = activity.getStepGoalFeedback(currentUser.id, '2019/09/22', currentUser.dailyStepGoal);
-  return `<p>Miles Walked: ${milesWalked}</p>
-          <p>Minutes Active: ${minutesActive}</p>
-          <p>Step Goal Achieved: ${stepGoalAchieved}</p>`;
-}
-
 function insertActivityData() {
   const activitiesBox = document.querySelector('#activities');
-  console.log(activitiesBox);
+  const activitiesForWeekBox = document.querySelector('#activities-over-week');
   activitiesBox.innerHTML = formatGeneralActivityData();
+  activitiesForWeekBox.innerHTML = formatActivityDataForWeek();
 }
