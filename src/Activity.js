@@ -33,10 +33,11 @@ class Activity {
   }
 
   getStepGoalFeedback(id, date, dailyStepGoal) {
-    if (this.findUserActivityByDate(id, date).numSteps >= dailyStepGoal) {
+    const currentUser = this.findUserActivityByDate(id, date);
+    if (currentUser.numSteps >= dailyStepGoal) {
       return true;
     }
-    if(this.findUserActivityByDate(id, date).numSteps < dailyStepGoal) {
+    if(currentUser.numSteps < dailyStepGoal) {
       return false;
     }
   }
