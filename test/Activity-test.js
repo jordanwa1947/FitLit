@@ -117,12 +117,12 @@ describe('Activity', function() {
     expect(activity.findAllTimeStairClimbingRecord(5)).to.equal(activityData[3])
   });
 
-  it.skip('should find the average number of stairs climbed for all users for a specified date', function() {
-
+  it('should find the average number of stairs climbed for all users for a specified date', function() {
+    expect(activity.findAverageStairsClimbedForDay("2019/06/15")).to.equal(23)
+    expect(activity.findAverageStairsClimbedForDay("2019/06/16")).to.equal(24);
   });
 
   it.skip('should find the average number of steps taken for a specific date for all users', function() {
-
   });
 
   it.skip('should find the average number of minutes active for a specific date for all users', function() {
