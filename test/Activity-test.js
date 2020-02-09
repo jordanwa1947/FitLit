@@ -36,6 +36,48 @@ beforeEach(() => {
       "numSteps": 9350,
       "minutesActive": 167,
       "flightsOfStairs": 38
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/17",
+      "numSteps": 8160,
+      "minutesActive": 72,
+      "flightsOfStairs": 25
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/18",
+      "numSteps": 10056,
+      "minutesActive": 120,
+      "flightsOfStairs": 34
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/19",
+      "numSteps": 13451,
+      "minutesActive": 203,
+      "flightsOfStairs": 2
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/20",
+      "numSteps": 3314,
+      "minutesActive": 240,
+      "flightsOfStairs": 6
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/21",
+      "numSteps": 11807,
+      "minutesActive": 142,
+      "flightsOfStairs": 46
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/22",
+      "numSteps": 3595,
+      "minutesActive": 243,
+      "flightsOfStairs": 19
     }
   ];
 
