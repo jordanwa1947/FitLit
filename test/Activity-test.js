@@ -136,12 +136,12 @@ describe('Activity', function() {
     expect(activity.findAverageMinutesActiveForWeek(4, "2019/06/22")).to.equal(175)
   });
 
-  it.skip('should return the average number of steps taken for a user for a given week', function() {
-    expect(activity.findAverageMinutesActiveForWeek(4, "2019/06/22")).to.equal(8725)
+  it('should return the average number of steps taken for a user for a given week', function() {
+    expect(activity.findAverageStepsTakenForWeek(4, "2019/06/22")).to.equal(8725)
   });
 
-  it.skip('should return the average number of stairs climbed for a user for a given week', function() {
-    expect(activity.findAverageMinutesActiveForWeek(4, "2019/06/22")).to.equal(20)
+  it('should return the average number of stairs climbed for a user for a given week', function() {
+    expect(activity.findAverageStairsClimbedForWeek(4, "2019/06/22")).to.equal(20)
   });
 
   describe('step goal achieved', function() {
