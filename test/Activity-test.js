@@ -79,11 +79,12 @@ describe('Activity', function() {
   });
 
   describe('step goal achieved', function() {
-    it.skip('should return true if step goal for a given day has been achieved', function() {
-
+    it('should return true if step goal for a given day has been achieved', function() {
+      expect(activity.getStepGoalFeedback(4, "2019/06/15", 4000)).to.equal(false);
     });
-    it.skip('should return false if step goal for a given day has not been achieved', function() {
 
+    it('should return false if step goal for a given day has not been achieved', function() {
+      expect(activity.getStepGoalFeedback(5, "2019/06/15", 8000)).to.equal(true)
     });
   });
 
