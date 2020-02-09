@@ -27,13 +27,22 @@ class Activity {
   }
 
   getStepGoalFeedback(id, date, dailyStepGoal) {
-    if (this.findUserActivityByDate(id, date).numSteps > dailyStepGoal) {
+    if (this.findUserActivityByDate(id, date).numSteps >= dailyStepGoal) {
       return true;
     }
-
     if(this.findUserActivityByDate(id, date).numSteps < dailyStepGoal) {
       return false;
     }
+  }
+
+  getAllDaysStepGoalWasExceeded(id, dailyStepGoal) {
+    const activityPerUser = this.findAllUserActivities(id);
+    const stepGoalExceeded = activityPerUser.filter(activity => {
+      return activity.numSteps > dailyStepGoal
+    });
+    return stepGoalExceeded.map(stepGoals => {
+      return stepGoals.date;
+    });
   }
 
 }
