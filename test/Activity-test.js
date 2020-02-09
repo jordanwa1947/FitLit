@@ -88,8 +88,9 @@ describe('Activity', function() {
     });
   });
 
-  it.skip('should find all the days a user exceeded their step goal', function() {
-
+  it('should find all the days a user exceeded their step goal', function() {
+    expect(activity.getAllDaysStepGoalWasExceeded(4, 4000)).to.deep.equal([]);
+    expect(activity.getAllDaysStepGoalWasExceeded(5, 4000)).to.deep.equal(["2019/06/15"])
   });
 
   it.skip('should find the all time stair climbing record for a user', function() {
