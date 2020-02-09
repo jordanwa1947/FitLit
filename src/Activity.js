@@ -94,16 +94,21 @@ class Activity {
     });
   }
 
-  findAverageMinutesActiveForWeek(id, date) {
+  findAverageMetricForWeek(id, date, metric) {
     const activitiesForWeek = this.findDataForAGivenWeek(date, this.activityData);
-    const minutesActiveForWeekByUser = activitiesForWeek.reduce((acc, activity) => {
+    const metricForWeekByUser = activitiesForWeek.reduce((acc, activity) => {
       if (activity.userID === id) {
-      return acc + activity.minutesActive;
+      return acc + activity[metric];
       }
       return acc;
     }, 0);
-    return Math.round(minutesActiveForWeekByUser / 7);
+    return Math.round(metricForWeekByUser / 7);
   }
+
+  findAverageMinutesActiveForWeek(id, date) {
+    return this.findAverageMetricForWeek(id, date, "minutesActive");
+  }
+
 }
 
 
