@@ -50,24 +50,20 @@ function formatGeneralActivityData() {
   const activity = new Activity(activityData);
   const milesWalked = activity.getMilesWalkedForDay(currentUser.id, '2019/09/22', currentUser.strideLength);
   const minutesActive = activity.getMinutesActive(currentUser.id, '2019/09/22');
-  const stepTakenForDay = activity.getNumStepsTakenForDay(currentUser.id, '2019/09/22');
+  const stepsTakenForDay = activity.getNumStepsTakenForDay(currentUser.id, '2019/09/22');
   return `<p>Miles Walked: ${milesWalked}</p>
           <p>Minutes Active: ${minutesActive}</p>
-          <p>Steps Taken Today: ${stepTakenForDay}</p>`;
+          <p>Steps Taken Today: ${stepsTakenForDay}</p>`;
 }
 
 function formatActivityDataForWeek() {
   const activity = new Activity(activityData);
-  const averageMinutesActive = activity.findAverageMinutesActiveForWeek(currentUser.id, '2019/09/22');
-  const daysStepGoalWasExceeded = (activity.getAllDaysStepGoalWasExceeded(currentUser.id, currentUser.dailyStepGoal));
-  const allTimeClimbingRecord = activity.findAllTimeStairClimbingRecord(currentUser.id);
-  return `<p>Average Minutes Active/Day: ${averageMinutesActive}</p>
-          <p>Days You Exceeded Your Step Goal</p>
-          <div class="step-goal-exceeded">
-            <p>${daysStepGoalWasExceeded.join(', ')}</p>
-          </div>
-          <p>All Time Climbing Record:</p>
-          <p>${allTimeClimbingRecord.flightsOfStairs} stairs on ${allTimeClimbingRecord.date}!</p>`
+  const averageStepsTakenForAllUsers = activity.findAverageStepsTakenForDay('2019/09/22');
+  const averageMinutesActiveForAllUsers = activity.findAverageMinutesActiveForDay('2019/09/22');
+  const averageStairsClimbedForAllusers = activity.findAverageStairsClimbedForDay('2019/09/22');
+  return `<p>Our users averaged ${averageStepsTakenForAllUsers} steps on this day.</p>
+          <p>Our users averaged ${averageMinutesActiveForAllUsers} active minutes on this day.</p>
+          <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
 }
 
 function insertHydrationData() {
