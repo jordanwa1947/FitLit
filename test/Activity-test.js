@@ -107,8 +107,9 @@ describe('Activity', function() {
     expect(activity.getAllDaysStepGoalWasExceeded(5, 4000)).to.deep.equal(["2019/06/15", "2019/06/16"])
   });
 
-  it.skip('should find the all time stair climbing record for a user', function() {
-
+  it('should find the all time stair climbing record for a user', function() {
+    expect(activity.findAllTimeStairClimbingRecord(4)).to.equal(activityData[0]);
+    expect(activity.findAllTimeStairClimbingRecord(5)).to.equal(activityData[3])
   });
 
   it.skip('should find the average number of stairs climbed for all users for a specified date', function() {
