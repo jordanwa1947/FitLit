@@ -1,9 +1,11 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const User = require('../src/User');
 const Activity = require('../src/Activity');
-let activityData, user, activity;
+const User = require('../src/User');
+const UserRepository = require('../src/UserRepository');
+
+let activityData, activity, users, userRepository;
 
 beforeEach(() => {
   activityData = [
@@ -37,7 +39,9 @@ beforeEach(() => {
     }
   ];
 
-  user = new User({
+  activity = new Activity(activityData);
+
+  users = [{
     "id": 4,
     "name": "Mae Connelly",
     "address": "28926 Schinner Islands, Turnermouth NE 23720-3230",
@@ -65,8 +69,9 @@ beforeEach(() => {
       33,
       10
     ]
-  })
-  activity = new Activity(activityData);
+  }];
+
+  userRepository = new UserRepository(users)
 });
 
 describe('Activity', function() {
