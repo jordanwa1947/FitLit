@@ -38,11 +38,19 @@ class Activity {
   getAllDaysStepGoalWasExceeded(id, dailyStepGoal) {
     const activityPerUser = this.findAllUserActivities(id);
     const stepGoalExceeded = activityPerUser.filter(activity => {
-      return activity.numSteps > dailyStepGoal
+      return activity.numSteps > dailyStepGoal;
     });
     return stepGoalExceeded.map(stepGoals => {
       return stepGoals.date;
     });
+  }
+
+  findAllTimeStairClimbingRecord(id) {
+    const activityPerUser = this.findAllUserActivities(id);
+    const stairClimbingSorted = activityPerUser.sort((a, b) => {
+      return a.flightsOfStairs - b.flightsOfStairs;
+    });
+    return stairClimbingSorted[stairClimbingSorted.length - 1];
   }
 
 }
