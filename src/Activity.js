@@ -68,10 +68,21 @@ class Activity {
     return Math.round(totalStairsClimbed / allUserActivities.length);
   }
 
+  findAverageStepsTakenForDay(date) {
+    const allUserActivities = this.findAllUserActivitiesByDate(date);
+    const totalStepsTaken = allUserActivities.reduce((acc, activity) => {
+      return acc + activity.numSteps;
+    }, 0);
+    return Math.round(totalStepsTaken / allUserActivities.length);
+  }
 
-
-
-
+  findAverageMinutesActiveForDay(date) {
+    const allUserActivities = this.findAllUserActivitiesByDate(date);
+    const totalMinutesActive = allUserActivities.reduce((acc, activity) => {
+      return acc + activity.minutesActive;
+    }, 0);
+    return Math.round(totalMinutesActive / allUserActivities.length);
+  }
 }
 
 
