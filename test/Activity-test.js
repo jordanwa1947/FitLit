@@ -20,6 +20,20 @@ beforeEach(() => {
       "numSteps": 11374,
       "minutesActive": 213,
       "flightsOfStairs": 13
+    },
+    {
+      "userID": 4,
+      "date": "2019/06/16",
+      "numSteps": 10689,
+      "minutesActive": 204,
+      "flightsOfStairs": 10
+    },
+    {
+      "userID": 5,
+      "date": "2019/06/16",
+      "numSteps": 9350,
+      "minutesActive": 167,
+      "flightsOfStairs": 38
     }
   ];
 
@@ -89,8 +103,8 @@ describe('Activity', function() {
   });
 
   it('should find all the days a user exceeded their step goal', function() {
-    expect(activity.getAllDaysStepGoalWasExceeded(4, 4000)).to.deep.equal([]);
-    expect(activity.getAllDaysStepGoalWasExceeded(5, 4000)).to.deep.equal(["2019/06/15"])
+    expect(activity.getAllDaysStepGoalWasExceeded(4, 4000)).to.deep.equal(["2019/06/16"]);
+    expect(activity.getAllDaysStepGoalWasExceeded(5, 4000)).to.deep.equal(["2019/06/15", "2019/06/16"])
   });
 
   it.skip('should find the all time stair climbing record for a user', function() {
