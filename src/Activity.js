@@ -53,6 +53,25 @@ class Activity {
     return stairClimbingSorted[stairClimbingSorted.length - 1];
   }
 
+  findAllUserActivitiesByDate(date) {
+    return this.activityData.filter(activity => {
+      return activity.date === date;
+    });
+    //Do I needa  return here?
+  }
+
+  findAverageStairsClimbedForDay(date) {
+    const allUserActivities = this.findAllUserActivitiesByDate(date);
+    const totalStairsClimbed = allUserActivities.reduce((acc, activity) => {
+      return acc + activity.flightsOfStairs;
+    }, 0);
+    return Math.round(totalStairsClimbed / allUserActivities.length);
+  }
+
+
+
+
+
 }
 
 
