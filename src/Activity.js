@@ -24,6 +24,10 @@ class Activity {
     });
   }
 
+  getNumStepsTakenForDay(id, date) {
+    return this.findUserActivityByDate(id, date).numSteps;
+  }
+
   getMilesWalkedForDay(id, date, stride) {
     return Number(((this.findUserActivityByDate(id, date).numSteps * stride) / 5280).toFixed(1));
   }
