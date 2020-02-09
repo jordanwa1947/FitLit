@@ -122,10 +122,13 @@ describe('Activity', function() {
     expect(activity.findAverageStairsClimbedForDay("2019/06/16")).to.equal(24);
   });
 
-  it.skip('should find the average number of steps taken for a specific date for all users', function() {
+  it('should find the average number of steps taken for a specific date for all users', function() {
+    expect(activity.findAverageStepsTakenForDay("2019/06/15")).to.equal(7430)
+    expect(activity.findAverageStepsTakenForDay("2019/06/16")).to.equal(10020);
   });
 
-  it.skip('should find the average number of minutes active for a specific date for all users', function() {
-
+  it('should find the average number of minutes active for a specific date for all users', function() {
+    expect(activity.findAverageMinutesActiveForDay("2019/06/15")).to.equal(164)
+    expect(activity.findAverageMinutesActiveForDay("2019/06/16")).to.equal(186);
   });
 });
