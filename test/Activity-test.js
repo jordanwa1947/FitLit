@@ -135,8 +135,8 @@ describe('Activity', function() {
     expect(activity.getMinutesActive(5, "2019/06/15")).to.equal(213);
   });
 
-  it.skip('should return the average number of active minutes for a given week', function() {
-
+  it('should return the average number of active minutes for a given week', function() {
+    expect(activity.findAverageMinutesActiveForWeek(4, "2019/06/22")).to.equal(175)
   });
 
   describe('step goal achieved', function() {
@@ -150,12 +150,12 @@ describe('Activity', function() {
   });
 
   it('should find all the days a user exceeded their step goal', function() {
-    expect(activity.getAllDaysStepGoalWasExceeded(4, 4000)).to.deep.equal(["2019/06/16"]);
+    expect(activity.getAllDaysStepGoalWasExceeded(4, 4000)).to.deep.equal(["2019/06/16", "2019/06/17", "2019/06/18", "2019/06/19", "2019/06/21"]);
     expect(activity.getAllDaysStepGoalWasExceeded(5, 4000)).to.deep.equal(["2019/06/15", "2019/06/16"])
   });
 
   it('should find the all time stair climbing record for a user', function() {
-    expect(activity.findAllTimeStairClimbingRecord(4)).to.equal(activityData[0]);
+    expect(activity.findAllTimeStairClimbingRecord(4)).to.equal(activityData[8]);
     expect(activity.findAllTimeStairClimbingRecord(5)).to.equal(activityData[3])
   });
 
