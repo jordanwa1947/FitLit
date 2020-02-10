@@ -47,7 +47,7 @@ function formatGeneralSleepData() {
 }
 
 function formatGeneralActivityData() {
-  const activity = new Activity(activityData);
+  const activity = new Activity(activityData, userRepository.repoMethods());
   const milesWalked = activity.getMilesWalkedForDay(currentUser.id, '2019/09/22', currentUser.strideLength);
   const minutesActive = activity.getMinutesActive(currentUser.id, '2019/09/22');
   const stepsTakenForDay = activity.getNumStepsTakenForDay(currentUser.id, '2019/09/22');
@@ -57,7 +57,7 @@ function formatGeneralActivityData() {
 }
 
 function formatActivityDataForWeek() {
-  const activity = new Activity(activityData);
+  const activity = new Activity(activityData, userRepository.repoMethods());
   const averageMinutesActiveForWeek = activity.findAverageMinutesActiveForWeek(currentUser.id, '2019/09/22');
   const averageStepsTakenForWeek = activity.findAverageStepsTakenForWeek(currentUser.id, '2019/09/22');
   const averageStairsClimbedForWeek = activity.findAverageStairsClimbedForWeek(currentUser.id, '2019/09/22');
@@ -67,7 +67,7 @@ function formatActivityDataForWeek() {
 }
 
 function formatCommunityActivity() {
-  const activity = new Activity(activityData);
+  const activity = new Activity(activityData, userRepository.repoMethods());
   const averageStepsTakenForAllUsers = activity.findAverageStepsTakenForDay('2019/09/22');
   const averageMinutesActiveForAllUsers = activity.findAverageMinutesActiveForDay('2019/09/22');
   const averageStairsClimbedForAllusers = activity.findAverageStairsClimbedForDay('2019/09/22');

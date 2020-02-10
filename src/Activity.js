@@ -1,6 +1,7 @@
 class Activity {
-  constructor(activityData) {
+  constructor(activityData, userRepoMethods) {
     this.activityData = activityData;
+    this.repoMethods = userRepoMethods;
   }
 
   findAllUserActivities(id) {
@@ -84,18 +85,8 @@ class Activity {
     return this.findAverageForAllUsers(date, "minutesActive");
   }
 
-  findDataForAGivenWeek(date, records) {
-    let currentDate = new Date(date).getTime();
-    const weekInMilliseconds = 604800000;
-    const lastWeek = currentDate - weekInMilliseconds;
-    return records.filter((data) => {
-      let dataDate = new Date(data.date).getTime();
-      return dataDate > lastWeek && dataDate <= currentDate;
-    });
-  }
-
   findAverageMetricForWeek(id, date, metric) {
-    const activitiesForWeek = this.findDataForAGivenWeek(date, this.activityData);
+    const activitiesForWeek = this.repoMethods.findDataForAGivenWeek(date, this.activityData);
     const metricForWeekByUser = activitiesForWeek.reduce((acc, activity) => {
       if (activity.userID === id) {
       return acc + activity[metric];
