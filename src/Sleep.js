@@ -1,6 +1,7 @@
 class Sleep {
-  constructor(sleepData) {
+  constructor(sleepData, searchMethods) {
     this.sleepData = sleepData;
+    this.search = searchMethods;
   }
 
   findUserSleepData(id, date) {
@@ -37,18 +38,8 @@ class Sleep {
     return this.findAverage(this.sleepData, field);
   }
 
-  findDataForAGivenWeek(date, records) {
-    let currentDate = new Date(date).getTime();
-    const weekInMilliseconds = 604800000;
-    const lastWeek = currentDate - weekInMilliseconds;
-    return records.filter((data) => {
-      let dataDate = new Date(data.date).getTime();
-      return dataDate > lastWeek && dataDate <= currentDate;
-    });
-  }
-
   findAverageForAUserOverAWeek(date, field) {
-    var records = this.findDataForAGivenWeek(date, this.sleepData);
+    var records = this.search.findDataForAGivenWeek(date, this.sleepData);
     return this.findAverage(records, field);
   };
 
@@ -88,7 +79,7 @@ class Sleep {
 
   findSleepDataForAWeek(id, date) {
     const sleepForAUser = this.findAllRecordsForAUser(id, this.sleepData);
-    return this.findDataForAGivenWeek(date, sleepForAUser);
+    return this.search.findDataForAGivenWeek(date, sleepForAUser);
   }
 }
 
