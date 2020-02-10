@@ -10,11 +10,11 @@ class Sleep {
     });
   }
 
-  findAverage(records, field) {
+  findAverage(records, field, denominator) {
     const sum = records.reduce((sum, data) => {
       return sum + data[field]
     }, 0);
-    return sum / records.length || 0;
+    return sum / denominator || 0;
   }
 
   returnSleepDataField(id, date, field) {
@@ -31,23 +31,23 @@ class Sleep {
 
   findAverageForAUser(id, field) {
     const userRecords = this.findAllRecordsForAUser(id, this.sleepData);
-    return this.findAverage(userRecords, field);
+    return this.findAverage(userRecords, field, userRecords.length);
   }
 
   findAverageForAllUsers(field) {
-    return this.findAverage(this.sleepData, field);
+    return this.findAverage(this.sleepData, field, this.sleepData.length);
   }
 
   findAverageForAUserOverAWeek(date, field) {
     var records = this.search.findDataForAGivenWeek(date, this.sleepData);
-    return this.findAverage(records, field);
+    return this.findAverage(records, field, records.length);
   };
 
   findUsersWithAvgGreaterThanThree(users, field, date) {
     const records = this.search.findDataForAGivenWeek(date, this.sleepData);
     return users.filter((user) => {
       const userRecords = this.findAllRecordsForAUser(user.id, records)
-      return this.findAverage(userRecords, field) > 3;
+      return this.findAverage(userRecords, field, userRecords.length) > 3;
     });
   }
 
