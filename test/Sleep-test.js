@@ -2,10 +2,12 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Sleep = require('../src/Sleep');
+const UserRepository = require('../src/UserRepository');
 
-let sleep, sleepData;
+let sleep, sleepData, userRepository;
 
 beforeEach(()=> {
+  userRepository = new UserRepository({});
   sleepData = [{
     "userID": 1,
     "date": "2019/06/15",
@@ -78,7 +80,7 @@ beforeEach(()=> {
     "hoursSlept": 10.8,
     "sleepQuality": 5.7
   }];
-  sleep = new Sleep(sleepData);
+  sleep = new Sleep(sleepData, userRepository.searchMethods());
 })
 
 describe('Sleep', function() {
@@ -104,11 +106,6 @@ describe('Sleep', function() {
 
   it('should be able to find the sleep data of users for a given date', function() {
     expect(sleep.returnSleepDataField(2, '2019/06/16', 'sleepQuality')).to.equal(5.7);
-  });
-
-  it('should be able to find all of the user sleep records for week', function() {
-    const usersWithinAGivenWeek = sleep.findDataForAGivenWeek('2019/06/15', sleepData);
-    expect(usersWithinAGivenWeek.length).to.equal(8);
   });
 
   it('should be able to find the average hours slept over a week', function() {

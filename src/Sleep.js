@@ -44,7 +44,7 @@ class Sleep {
   };
 
   findUsersWithAvgGreaterThanThree(users, field, date) {
-    const records = this.findDataForAGivenWeek(date, this.sleepData);
+    const records = this.search.findDataForAGivenWeek(date, this.sleepData);
     return users.filter((user) => {
       const userRecords = this.findAllRecordsForAUser(user.id, records)
       return this.findAverage(userRecords, field) > 3;
