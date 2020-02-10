@@ -1,7 +1,7 @@
 class Sleep {
-  constructor(sleepData, searchMethods) {
+  constructor(sleepData, userRepoMethods) {
     this.sleepData = sleepData;
-    this.search = searchMethods;
+    this.repoMethods = userRepoMethods;
   }
 
   findUserSleepData(id, date) {
@@ -24,23 +24,23 @@ class Sleep {
 
   findAverageForAUser(id, field) {
     const userRecords = this.findAllRecordsForAUser(id, this.sleepData);
-    return this.search.findAverage(userRecords, field, userRecords.length);
+    return this.repoMethods.findAverage(userRecords, field, userRecords.length);
   }
 
   findAverageForAllUsers(field) {
-    return this.search.findAverage(this.sleepData, field, this.sleepData.length);
+    return this.repoMethods.findAverage(this.sleepData, field, this.sleepData.length);
   }
 
   findAverageForAUserOverAWeek(date, field) {
-    var records = this.search.findDataForAGivenWeek(date, this.sleepData);
-    return this.search.findAverage(records, field, records.length);
+    var records = this.repoMethods.findDataForAGivenWeek(date, this.sleepData);
+    return this.repoMethods.findAverage(records, field, records.length);
   };
 
   findUsersWithAvgGreaterThanThree(users, field, date) {
-    const records = this.search.findDataForAGivenWeek(date, this.sleepData);
+    const records = this.repoMethods.findDataForAGivenWeek(date, this.sleepData);
     return users.filter((user) => {
       const userRecords = this.findAllRecordsForAUser(user.id, records)
-      return this.search.findAverage(userRecords, field, userRecords.length) > 3;
+      return this.repoMethods.findAverage(userRecords, field, userRecords.length) > 3;
     });
   }
 
@@ -72,7 +72,7 @@ class Sleep {
 
   findSleepDataForAWeek(id, date) {
     const sleepForAUser = this.findAllRecordsForAUser(id, this.sleepData);
-    return this.search.findDataForAGivenWeek(date, sleepForAUser);
+    return this.repoMethods.findDataForAGivenWeek(date, sleepForAUser);
   }
 }
 

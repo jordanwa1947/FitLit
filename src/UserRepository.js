@@ -14,7 +14,7 @@ class UserRepository {
     return totalDailySteps / this.users.length;
   }
 
-  searchMethods() {
+  repoMethods() {
     function findDataForAGivenWeek(date, records) {
       let currentDate = new Date(date).getTime();
       const weekInMilliseconds = 604800000;

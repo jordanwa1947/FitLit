@@ -26,7 +26,7 @@ function formatHydrationDataForAWeek(records) {
 }
 
 function formatSleepDataForAWeek() {
-  const sleep = new Sleep(sleepData, userRepository.searchMethods());
+  const sleep = new Sleep(sleepData, userRepository.repoMethods());
   const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
   return sleepDataForAWeek.reduce((string, record) => {
     string += `<p>${record.date}</p>`
@@ -36,7 +36,7 @@ function formatSleepDataForAWeek() {
 }
 
 function formatGeneralSleepData() {
-  const sleep = new Sleep(sleepData, userRepository.searchMethods());
+  const sleep = new Sleep(sleepData, userRepository.repoMethods());
   const userSleepData = sleep.findUserSleepData(currentUser.id, '2019/09/22');
   const avgHoursSlept = sleep.findAverageForAUser(currentUser.id, 'hoursSlept');
   const avgSleepQuality = sleep.findAverageForAUser(currentUser.id, 'sleepQuality');

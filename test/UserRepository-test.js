@@ -144,8 +144,8 @@ describe('UserRepository Module Methods', function() {
   });
 
   it('should be able to find all of the user sleep records for week', function() {
-    const searchMethods = userRepository.searchMethods();
-    const usersWithinAGivenWeek = searchMethods.findDataForAGivenWeek('2019/06/15', sleepData);
+    const repoMethods = userRepository.repoMethods();
+    const usersWithinAGivenWeek = repoMethods.findDataForAGivenWeek('2019/06/15', sleepData);
     expect(usersWithinAGivenWeek.length).to.equal(8);
   });
 

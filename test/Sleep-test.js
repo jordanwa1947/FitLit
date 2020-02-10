@@ -80,7 +80,7 @@ beforeEach(()=> {
     "hoursSlept": 10.8,
     "sleepQuality": 5.7
   }];
-  sleep = new Sleep(sleepData, userRepository.searchMethods());
+  sleep = new Sleep(sleepData, userRepository.repoMethods());
 })
 
 describe('Sleep', function() {
