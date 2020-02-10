@@ -1,6 +1,7 @@
 class Hydration {
-  constructor(hydrationData) {
+  constructor(hydrationData, userRepoMethods) {
     this.hydrationData = hydrationData;
+    this.repoMethods = userRepoMethods;
   }
 
   findDataForAUser(id) {
@@ -25,19 +26,9 @@ class Hydration {
     return hydrationPerDate.numOunces;
   }
 
-  findDataForAGivenWeek(date, records) {
-    let currentDate = new Date(date).getTime();
-    const weekInMilliseconds = 604800000;
-    const lastWeek = currentDate - weekInMilliseconds;
-    return records.filter((data) => {
-      let dataDate = new Date(data.date).getTime();
-      return dataDate > lastWeek && dataDate <= currentDate;
-    });
-  }
-
   findHydrationDataForAWeek(id, date) {
     const hydrationForAUser = this.findDataForAUser(id);
-    return this.findDataForAGivenWeek(date, hydrationForAUser);
+    return this.repoMethods.findDataForAGivenWeek(date, hydrationForAUser);
   }
 }
 
