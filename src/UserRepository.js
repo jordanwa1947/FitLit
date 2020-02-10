@@ -25,8 +25,16 @@ class UserRepository {
       });
     }
 
+    function findAverage(records, field, denominator) {
+      const sum = records.reduce((sum, data) => {
+        return sum + data[field]
+      }, 0);
+      return sum / denominator || 0;
+    }
+
     return {
-      findDataForAGivenWeek: findDataForAGivenWeek
+      findDataForAGivenWeek: findDataForAGivenWeek,
+      findAverage: findAverage
     }
   }
 }
