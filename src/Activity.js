@@ -88,6 +88,26 @@ class Activity {
     return this.findAverageMetricForWeek(id, date, "flightsOfStairs");
   }
 
+  sortFriendSteps(averageSteps) {
+    return averageSteps.sort((a, b) => {
+      if (a[1] < b[1]) {
+        return 1;
+      } else if (a[1] > b[1]){
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  calculateFriendSteps(friendIds, date) {
+    const friendAverageSteps = friendIds.map(id => {
+      const average = this.findAverageStairsClimbedForWeek(id, date);
+      return [id, average];
+    });
+    return this.sortFriendSteps(friendAverageSteps)
+  }
+
 }
 
 
