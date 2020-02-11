@@ -4,25 +4,12 @@ class Activity {
     this.repoMethods = userRepoMethods;
   }
 
-  findAllUserActivities(id) {
-    const activityPerUser = this.activityData.filter(activity => {
-      return activity.userID === id;
-    });
-    return activityPerUser;
-  }
-
   findUserActivityByDate(id, date) {
-    const activityPerUser = this.findAllUserActivities(id);
+    const activityPerUser = this.repoMethods.filterRecords(id, 'userID', this.activityData);
     const activityPerDate = activityPerUser.find(activity => {
       return activity.date === date;
     });
     return activityPerDate;
-  }
-
-  findAllUserActivitiesByDate(date) {
-    return this.activityData.filter(activity => {
-      return activity.date === date;
-    });
   }
 
   getNumStepsTakenForDay(id, date) {
@@ -30,7 +17,9 @@ class Activity {
   }
 
   getMilesWalkedForDay(id, date, stride) {
-    return Number(((this.findUserActivityByDate(id, date).numSteps * stride) / 5280).toFixed(1));
+    const userActivity = this.findUserActivityByDate(id, date);
+    const lengthWalked = userActivity.numSteps * stride / 5280;
+    return Number((lengthWalked).toFixed(1));
   }
 
   getMinutesActive(id, date) {
@@ -43,7 +32,7 @@ class Activity {
   }
 
   getAllDaysStepGoalWasExceeded(id, dailyStepGoal) {
-    const activityPerUser = this.findAllUserActivities(id);
+    const activityPerUser = this.repoMethods.filterRecords(id, 'userID', this.activityData);
     const stepGoalExceeded = activityPerUser.filter(activity => {
       return activity.numSteps > dailyStepGoal;
     });
@@ -53,7 +42,7 @@ class Activity {
   }
 
   findAllTimeStairClimbingRecord(id) {
-    const activityPerUser = this.findAllUserActivities(id);
+    const activityPerUser = this.repoMethods.filterRecords(id, 'userID', this.activityData);
     const stairClimbingSorted = activityPerUser.sort((a, b) => {
       return a.flightsOfStairs - b.flightsOfStairs;
     });
@@ -61,7 +50,7 @@ class Activity {
   }
 
   findAverageForAllUsers(date, metric) {
-    const allUserActivities = this.findAllUserActivitiesByDate(date);
+    const allUserActivities = this.repoMethods.filterRecords(date, 'date', this.activityData);
     const totalSumForMetric = allUserActivities.reduce((acc, activity) => {
       return acc + activity[metric];
     }, 0);
@@ -81,7 +70,7 @@ class Activity {
   }
 
   findAverageMetricForWeek(id, date, metric) {
-    const activitiesForAUser = this.findAllUserActivities(id);
+    const activitiesForAUser = this.repoMethods.filterRecords(id, 'userID', this.activityData);
     const activitiesForWeek = this.repoMethods.findDataForAGivenWeek(date, activitiesForAUser);
     const average = this.repoMethods.findAverage(activitiesForWeek, metric, 7);
     return Math.round(average);
