@@ -39,12 +39,7 @@ class Activity {
 
   getStepGoalFeedback(id, date, dailyStepGoal) {
     const currentUser = this.findUserActivityByDate(id, date);
-    if (currentUser.numSteps >= dailyStepGoal) {
-      return true;
-    }
-    if(currentUser.numSteps < dailyStepGoal) {
-      return false;
-    }
+    return currentUser.numSteps >= dailyStepGoal ? true : false;
   }
 
   getAllDaysStepGoalWasExceeded(id, dailyStepGoal) {
@@ -86,14 +81,10 @@ class Activity {
   }
 
   findAverageMetricForWeek(id, date, metric) {
-    const activitiesForWeek = this.repoMethods.findDataForAGivenWeek(date, this.activityData);
-    const metricForWeekByUser = activitiesForWeek.reduce((acc, activity) => {
-      if (activity.userID === id) {
-      return acc + activity[metric];
-      }
-      return acc;
-    }, 0);
-    return Math.round(metricForWeekByUser / 7);
+    const activitiesForAUser = this.findAllUserActivities(id);
+    const activitiesForWeek = this.repoMethods.findDataForAGivenWeek(date, activitiesForAUser);
+    const average = this.repoMethods.findAverage(activitiesForWeek, metric, 7);
+    return Math.round(average);
   }
 
   findAverageMinutesActiveForWeek(id, date) {
