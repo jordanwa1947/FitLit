@@ -100,10 +100,18 @@ class Activity {
     })
   }
 
+  sumStepsForAUser(id, date) {
+    const activitiesForAUser = this.repoMethods.filterRecords(id, 'userID', this.activityData);
+    const activitiesForWeek = this.repoMethods.findDataForAGivenWeek(date, activitiesForAUser);
+    return activitiesForWeek.reduce((sum, activity) => {
+      return sum + activity.numSteps;
+    }, 0)
+  }
+
   calculateFriendSteps(friendIds, date) {
     const friendAverageSteps = friendIds.map(id => {
-      const average = this.findAverageStairsClimbedForWeek(id, date);
-      return [id, average];
+      const total = this.sumStepsForAUser(id, date);
+      return [id, total];
     });
     return this.sortFriendSteps(friendAverageSteps)
   }
