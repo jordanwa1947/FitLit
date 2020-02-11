@@ -1,6 +1,7 @@
 class Sleep {
-  constructor(sleepData) {
+  constructor(sleepData, userRepoMethods) {
     this.sleepData = sleepData;
+    this.repoMethods = userRepoMethods;
   }
 
   findUserSleepData(id, date) {
@@ -9,54 +10,29 @@ class Sleep {
     });
   }
 
-  findAverage(records, field) {
-    const sum = records.reduce((sum, data) => {
-      return sum + data[field]
-    }, 0);
-    return sum / records.length || 0;
-  }
-
   returnSleepDataField(id, date, field) {
     return this.findUserSleepData(id, date)[field];
   }
 
-  findAllRecordsForAUser(id, records) {
-    return records.filter((data) => data.userID === id);
-  }
-
-  findAllRecordsByDate(date) {
-    return this.sleepData.filter((data) => data.date === date);
-  }
-
   findAverageForAUser(id, field) {
-    const userRecords = this.findAllRecordsForAUser(id, this.sleepData);
-    return this.findAverage(userRecords, field);
+    const userRecords = this.repoMethods.filterRecords(id, 'userID', this.sleepData);
+    return this.repoMethods.findAverage(userRecords, field, userRecords.length);
   }
 
   findAverageForAllUsers(field) {
-    return this.findAverage(this.sleepData, field);
-  }
-
-  findDataForAGivenWeek(date, records) {
-    let currentDate = new Date(date).getTime();
-    const weekInMilliseconds = 604800000;
-    const lastWeek = currentDate - weekInMilliseconds;
-    return records.filter((data) => {
-      let dataDate = new Date(data.date).getTime();
-      return dataDate > lastWeek && dataDate <= currentDate;
-    });
+    return this.repoMethods.findAverage(this.sleepData, field, this.sleepData.length);
   }
 
   findAverageForAUserOverAWeek(date, field) {
-    var records = this.findDataForAGivenWeek(date, this.sleepData);
-    return this.findAverage(records, field);
+    var records = this.repoMethods.findDataForAGivenWeek(date, this.sleepData);
+    return this.repoMethods.findAverage(records, field, records.length);
   };
 
   findUsersWithAvgGreaterThanThree(users, field, date) {
-    const records = this.findDataForAGivenWeek(date, this.sleepData);
+    const records = this.repoMethods.findDataForAGivenWeek(date, this.sleepData);
     return users.filter((user) => {
-      const userRecords = this.findAllRecordsForAUser(user.id, records)
-      return this.findAverage(userRecords, field) > 3;
+      const userRecords = this.repoMethods.filterRecords(user.id, 'userID', records);
+      return this.repoMethods.findAverage(userRecords, field, userRecords.length) > 3;
     });
   }
 
@@ -73,7 +49,7 @@ class Sleep {
   }
 
   findTheUserWithTheMostSleep(date) {
-    const sleepRecords = this.findAllRecordsByDate(date);
+    const sleepRecords = this.repoMethods.filterRecords(date, 'date', this.sleepData);
     const sortedRecords = this.sortRecordsBySleep(sleepRecords);
     let greatestRecord = sortedRecords[sortedRecords.length - 1];
     const greatest = [greatestRecord];
@@ -87,8 +63,8 @@ class Sleep {
   }
 
   findSleepDataForAWeek(id, date) {
-    const sleepForAUser = this.findAllRecordsForAUser(id, this.sleepData);
-    return this.findDataForAGivenWeek(date, sleepForAUser);
+    const sleepForAUser = this.repoMethods.filterRecords(id, 'userID', this.sleepData);
+    return this.repoMethods.findDataForAGivenWeek(date, sleepForAUser);
   }
 }
 

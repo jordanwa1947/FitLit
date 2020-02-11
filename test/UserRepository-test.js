@@ -46,3 +46,107 @@ describe('UserRepository', function() {
   });
 
 });
+
+describe('UserRepository Module Methods', function() {
+  let userRepository, users, sleepData;
+  beforeEach(function() {
+    users = [{
+      "id": 1,
+      "name": "Luisa Hane",
+      "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+      "email": "Diana.Hayes1@hotmail.com",
+      "strideLength": 4.3,
+      "dailyStepGoal": 10000,
+      "friends": [16,4,8]
+    },
+    {
+      "id": 2,
+      "name": "Jarvis Considine",
+      "address": "30086 Kathryn Port, Ciceroland NE 07273",
+      "email": "Dimitri.Bechtelar11@gmail.com",
+      "strideLength": 4.5,
+      "dailyStepGoal": 5000,
+      "friends": [9,18,24,19]
+    }];
+    sleepData = [{
+      "userID": 1,
+      "date": "2019/06/15",
+      "hoursSlept": 8.1,
+      "sleepQuality": 2.2
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/15",
+      "hoursSlept": 7,
+      "sleepQuality": 4.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/14",
+      "hoursSlept": 7,
+      "sleepQuality": 4.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/13",
+      "hoursSlept": 7,
+      "sleepQuality": 4.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/12",
+      "hoursSlept": 7,
+      "sleepQuality": 4.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/11",
+      "hoursSlept": 7,
+      "sleepQuality": 4.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/10",
+      "hoursSlept": 10.8,
+      "sleepQuality": 5.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/09",
+      "hoursSlept": 10.8,
+      "sleepQuality": 5.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/08",
+      "hoursSlept": 10.8,
+      "sleepQuality": 5.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/07",
+      "hoursSlept": 10.8,
+      "sleepQuality": 5.7
+    },
+    {
+      "userID": 2,
+      "date": "2019/06/16",
+      "hoursSlept": 10.8,
+      "sleepQuality": 5.7
+    },
+    {
+      "userID": 3,
+      "date": "2019/06/08",
+      "hoursSlept": 10.8,
+      "sleepQuality": 5.7
+    }];
+    userRepository = new UserRepository(users);
+  });
+
+  it('should be able to find all of the user sleep records for week', function() {
+    const repoMethods = userRepository.repoMethods();
+    const usersWithinAGivenWeek = repoMethods.findDataForAGivenWeek('2019/06/15', sleepData);
+    expect(usersWithinAGivenWeek.length).to.equal(8);
+  });
+
+});

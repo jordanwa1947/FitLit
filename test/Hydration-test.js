@@ -2,7 +2,8 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Hydration = require('../src/Hydration');
-let hydration, hydrationData;
+const UserRepository = require('../src/UserRepository');
+let hydration, hydrationData, userRepository;
 
 beforeEach(()=> {
   hydrationData = [{
@@ -25,8 +26,8 @@ beforeEach(()=> {
     "date": "2019/06/15",
     "numOunces": 75
   }];
-
-  hydration = new Hydration(hydrationData);
+  userRepository = new UserRepository({});
+  hydration = new Hydration(hydrationData, userRepository.repoMethods());
 })
 
 describe('Hydration', function() {

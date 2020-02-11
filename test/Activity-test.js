@@ -2,8 +2,9 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const Activity = require('../src/Activity');
+const UserRepository = require('../src/UserRepository');
 
-let activityData, activity, users;
+let userRepository, activityData, activity, users;
 
 beforeEach(() => {
   activityData = [
@@ -79,8 +80,6 @@ beforeEach(() => {
     }
   ];
 
-  activity = new Activity(activityData);
-
   users = [{
     "id": 4,
     "name": "Mae Connelly",
@@ -111,6 +110,8 @@ beforeEach(() => {
     ]
   }];
 
+  userRepository = new UserRepository(users);
+  activity = new Activity(activityData, userRepository.repoMethods());
 });
 
 describe('Activity', function() {
