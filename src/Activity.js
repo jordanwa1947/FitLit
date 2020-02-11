@@ -88,6 +88,34 @@ class Activity {
     return this.findAverageMetricForWeek(id, date, "flightsOfStairs");
   }
 
+  sortFriendSteps(averageSteps) {
+    return averageSteps.sort((a, b) => {
+      if (a[1] < b[1]) {
+        return 1;
+      } else if (a[1] > b[1]){
+        return -1;
+      } else {
+        return 0;
+      }
+    })
+  }
+
+  sumStepsForAUser(id, date) {
+    const activitiesForAUser = this.repoMethods.filterRecords(id, 'userID', this.activityData);
+    const activitiesForWeek = this.repoMethods.findDataForAGivenWeek(date, activitiesForAUser);
+    return activitiesForWeek.reduce((sum, activity) => {
+      return sum + activity.numSteps;
+    }, 0)
+  }
+
+  calculateFriendSteps(friendIds, date) {
+    const friendAverageSteps = friendIds.map(id => {
+      const total = this.sumStepsForAUser(id, date);
+      return [id, total];
+    });
+    return this.sortFriendSteps(friendAverageSteps)
+  }
+
 }
 
 

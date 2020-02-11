@@ -4,6 +4,7 @@ insertUserInfo();
 insertHydrationData();
 insertSleepData();
 insertActivityData();
+insertFriendRankings()
 
 function insertUserInfo() {
   const user = new User(userRepository.users[0]);
@@ -100,4 +101,27 @@ function insertActivityData() {
   activitiesBox.innerHTML = formatGeneralActivityData();
   activitiesForWeekBox.innerHTML = formatActivityDataForWeek();
   activityComparisonForCommunity.innerHTML = formatCommunityActivity();
+}
+
+function findFriendAverages() {
+  const activity = new Activity(activityData, userRepository.repoMethods());
+  currentUser.friends.push(currentUser.id);
+  const averages = activity.calculateFriendSteps(currentUser.friends, '2019/09/22');
+  return averages.map(average => {
+    const userId = average[0];
+    average[0] = userRepository.getUserData(userId);
+    return average;
+  })
+}
+
+function insertFriendRankings() {
+  const friendsAndAverages = findFriendAverages();
+  const rankingContainer = document.getElementById('friend-rankings');
+  const html = friendsAndAverages.reduce((string, friend, index) => {
+    string += `<p>${friend[0].name}</p>`;
+    string += `<p>Average: ${friend[1]}</p>`
+    string += `<p>Rank: ${Number.parseInt(index) + 1}</p>`;
+    return string
+  }, ``)
+  rankingContainer.innerHTML = html;
 }
