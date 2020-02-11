@@ -15,6 +15,11 @@ class UserRepository {
   }
 
   repoMethods() {
+
+    function filterRecords(query, field, records) {
+      return records.filter((record) => record[field] === query);
+    }
+
     function findDataForAGivenWeek(date, records) {
       let currentDate = new Date(date).getTime();
       const weekInMilliseconds = 604800000;
@@ -34,7 +39,8 @@ class UserRepository {
 
     return {
       findDataForAGivenWeek: findDataForAGivenWeek,
-      findAverage: findAverage
+      findAverage: findAverage,
+      filterRecords: filterRecords
     }
   }
 }

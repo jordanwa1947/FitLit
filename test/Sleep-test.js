@@ -143,7 +143,7 @@ describe('Sleep', function() {
   });
 
   it('should be able to find all records for a date', function() {
-    expect(sleep.findAllRecordsByDate('2019/06/15')).to.deep.equal([{
+    expect(sleep.repoMethods.filterRecords('2019/06/15', 'date', sleepData)).to.deep.equal([{
       "userID": 1,
       "date": "2019/06/15",
       "hoursSlept": 8.1,
