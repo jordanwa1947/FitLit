@@ -12,10 +12,7 @@ class Hydration {
 
   calcAvgOuncesConsumedForAllTime(id) {
     const hydrationPerUser = this.findDataForAUser(id);
-    let totalHydration = hydrationPerUser.reduce((acc, hydration) => {
-      return acc + hydration.numOunces
-    }, 0)
-    return totalHydration / hydrationPerUser.length;
+    return this.repoMethods.findAverage(hydrationPerUser, 'numOunces', hydrationPerUser.length);
   }
 
   displayFluidOuncesConsumed(id, date) {
