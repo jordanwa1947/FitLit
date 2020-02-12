@@ -89,20 +89,24 @@ function formatCommunityActivity() {
           <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
 }
 
+function createCoordinates(records, metric) {
+  const xCoordDates = [];
+  const yCoordOunces = [];
+  records.forEach(record => {
+    xCoordDates.push(record.date);
+    yCoordOunces.push(record[metric]);
+  });
+  return {
+    x: xCoordDates,
+    y: yCoordOunces,
+  }
+}
+
 function insertWeekHydrationData() {
   const hydration = new Hydration(hydrationData, userRepository.repoMethods());
   const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
-  const xCoordDates = [];
-  const yCoordOunces = [];
-  hydrationDataForAWeek.forEach(hydrationData => {
-    xCoordDates.push(hydrationData.date);
-    yCoordOunces.push(hydrationData.numOunces);
-  });
-  const waterGraphCoords = {
-    x: xCoordDates,
-    y: yCoordOunces,
-    mode: 'lines+marks',
-  }
+  const waterGraphCoords = createCoordinates(hydrationDataForAWeek, 'numOunces');
+  waterGraphCoords.mode = 'lines';
   const data = [ waterGraphCoords ];
   const layout = {
     title:'Water Week',
