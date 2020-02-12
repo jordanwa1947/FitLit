@@ -1,7 +1,8 @@
 const userRepository = new UserRepository(userData);
 const currentUser = chooseCurrentUser();
 insertUserInfo();
-insertHydrationData();
+insertUserHydrationData();
+insertWeekHydrationData();
 insertSleepData();
 insertActivityData();
 insertFriendRankings();
@@ -88,14 +89,27 @@ function formatCommunityActivity() {
           <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
 }
 
-function formatHydrationDataForAWeek() {
+function insertWeekHydrationData() {
   const hydration = new Hydration(hydrationData, userRepository.repoMethods());
   const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
-  return hydrationDataForAWeek.reduce((string, record) => {
-    string += `<p>${record.date}</p>`
-    string += `<p>Ounces: ${record.numOunces}</p>`
-    return string;
-  }, '<p>Ounces For Each Day:</p>');
+  const xCoordDates = [];
+  const yCoordOunces = [];
+  hydrationDataForAWeek.forEach(hydrationData => {
+    xCoordDates.push(hydrationData.date);
+    yCoordOunces.push(hydrationData.numOunces);
+  });
+  const waterGraphCoords = {
+    x: xCoordDates,
+    y: yCoordOunces,
+    mode: 'lines+marks',
+  }
+  const data = [ waterGraphCoords ];
+  const layout = {
+    title:'Water Week',
+    width: 750,
+    height: 300
+  };
+  Plotly.newPlot('water-over-a-week', data, layout);
 }
 
 function formatUserHydrationData() {
@@ -106,11 +120,9 @@ function formatUserHydrationData() {
           <p>Your Average: ${avgOunces}</p>`
 }
 
-function insertHydrationData() {
+function insertUserHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
-  const waterOverAWeek = document.getElementById('water-over-a-week');
   waterConsumed.innerHTML = formatUserHydrationData();
-  waterOverAWeek.innerHTML = formatHydrationDataForAWeek();
 }
 
 function insertSleepData() {
