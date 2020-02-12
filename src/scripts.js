@@ -1,14 +1,20 @@
 const userRepository = new UserRepository(userData);
-const currentUser = userRepository.users[0];
+const currentUser = chooseCurrentUser();
 insertUserInfo();
 insertHydrationData();
 insertSleepData();
 insertActivityData();
 insertFriendRankings();
 insertStepStreakDays();
+insertPercentageStepGoalMet()
+
+function chooseCurrentUser() {
+  const randIndex = Math.floor(Math.random() * userData.length);
+  return userData[randIndex];
+}
 
 function insertUserInfo() {
-  const user = new User(userRepository.users[0]);
+  const user = new User(currentUser);
   const title = `Hi, ${user.getUserFirstName()}!`
   document.getElementById('get-fit-title').innerText = title;
   document.getElementById('user-name').innerText = `${user.name}`;
@@ -17,14 +23,6 @@ function insertUserInfo() {
   document.getElementById('user-stride-length').innerText = `Stride Length: ${user.strideLength}`;
   document.getElementById('daily-step-goal').innerText = `Daily Step Goal: ${user.dailyStepGoal}`;
   document.getElementById('avg-step-goal').innerText = `Average Steps: ${userRepository.calculateAvgStepGoalOfUsers()}`;
-}
-
-function formatHydrationDataForAWeek(records) {
-  return records.reduce((string, record) => {
-    string += `<p>${record.date}</p>`
-    string += `<p>Ounces: ${record.numOunces}</p>`
-    return string;
-  }, '<p>Ounces For Each Day:</p>');
 }
 
 function formatSleepDataForAWeek() {
@@ -78,14 +76,29 @@ function formatCommunityActivity() {
           <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
 }
 
+function formatHydrationDataForAWeek() {
+  const hydration = new Hydration(hydrationData, userRepository.repoMethods());
+  const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
+  return hydrationDataForAWeek.reduce((string, record) => {
+    string += `<p>${record.date}</p>`
+    string += `<p>Ounces: ${record.numOunces}</p>`
+    return string;
+  }, '<p>Ounces For Each Day:</p>');
+}
+
+function formatUserHydrationData() {
+  const hydration = new Hydration(hydrationData, userRepository.repoMethods());
+  const avgOunces = hydration.calcAvgOuncesConsumedForAllTime(currentUser.id);
+  const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
+  return `<p>Ounces Drank: ${todaysHydrationData}</p>
+          <p>Your Average: ${avgOunces}</p>`
+}
+
 function insertHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
   const waterOverAWeek = document.getElementById('water-over-a-week');
-  const hydration = new Hydration(hydrationData, userRepository.repoMethods());
-  const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
-  const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
-  waterConsumed.innerHTML = `<p>Ounces Drank: ${todaysHydrationData}</p>`
-  waterOverAWeek.innerHTML = formatHydrationDataForAWeek(hydrationDataForAWeek)
+  waterConsumed.innerHTML = formatUserHydrationData();
+  waterOverAWeek.innerHTML = formatHydrationDataForAWeek();
 }
 
 function insertSleepData() {
@@ -142,4 +155,11 @@ function insertStepStreakDays() {
   const streakHTML = formatStreakDays();
   const allStepsBox = document.getElementById('days-exceeding-all-steps');
   allStepsBox.insertAdjacentHTML('beforeend', streakHTML);
+}
+
+function insertPercentageStepGoalMet() {
+  const percentage = document.getElementById('percentage-goal-met');
+  const activity = new Activity(activityData, userRepository.repoMethods());
+  const percent = activity.percentStepGoalWasMet(currentUser.id, currentUser.dailyStepGoal);
+  percentage.innerText = `You've met your step goal: ${percent}%`;
 }
