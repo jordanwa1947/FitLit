@@ -75,9 +75,10 @@ function formatCommunityActivity() {
   const averageStepsTakenForAllUsers = activity.findAverageStepsTakenForDay('2019/09/22');
   const averageMinutesActiveForAllUsers = activity.findAverageMinutesActiveForDay('2019/09/22');
   const averageStairsClimbedForAllusers = activity.findAverageStairsClimbedForDay('2019/09/22');
-  return `<p>Our users averaged ${averageStepsTakenForAllUsers} steps on this day.</p>
-          <p>Our users averaged ${averageMinutesActiveForAllUsers} active minutes on this day.</p>
-          <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
+  return `<h3>Averge stats for the community at large</h3>
+            <p>Our users averaged <span>${averageStepsTakenForAllUsers}</span> steps on this day.</p>
+            <p>Our users averaged <span>${averageMinutesActiveForAllUsers}</span> active minutes on this day.</p>
+            <p>Our users averaged <span>${averageStairsClimbedForAllusers}</span> stairs climbed on this day.</p>`;
 }
 
 function createCoordinates(records, metric) {
