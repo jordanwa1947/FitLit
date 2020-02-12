@@ -4,27 +4,38 @@
     <meta charset="UTF-8">
     <title>Activity Tracker</title>
     <link rel="stylesheet" href="./styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
   		<div>
   			<h1>Fit<span>Lit</span></h1>
-  			<img src="https://image.flaticon.com/icons/svg/785/785116.svg" alt="fire clipart">
+  			<img src="../assets/004-fire.svg" alt="fire clipart">
   		</div>
-  		<div>
-  			<img src="https://image.flaticon.com/icons/svg/149/149452.svg"alt="image icon">
+  		<div class="header-user-name">
+  			<img src="../assets/002-user-1.svg"alt="profile icon">
   			<h2 id="user-name"></h2>
   		</div>
   	</header>
   	<main>
   		<section class="user-info">
+        <img src="../assets/020-strength.svg" alt="strength icon">
   			<h3 id="get-fit-title"></h3>
   			<p id="user-name"></p>
   			<p id="user-id"></p>
-  			<p id="user-address"></p>
-  			<p id="user-stride-length"></p>
-  			<p id="daily-step-goal"></p>
-  			<p id="avg-step-goal"></p>
+        <div class="address-info">
+          <img id="placeholder-icon" src="../assets/005-placeholder.svg" alt="location icon">
+    			<p id="user-address"></p>
+        </div>
+        <div class="stride-length">
+          <img id="stride-length-icon" src="../assets/007-running.svg" alt="foot icon">
+          <p id="user-stride-length"></p>
+        </div>
+        <div class="step-goal">
+          <img id="target-icon" src="../assets/010-target.svg" alt="target icon">
+    			<p id="daily-step-goal"></p>
+    			<p id="avg-step-goal"></p>
+        <div>
   		</section>
   		<section id="activities">
   			<p>Today's Activity</p>
