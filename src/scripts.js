@@ -4,7 +4,7 @@ insertUserInfo();
 insertHydrationData();
 insertSleepData();
 insertActivityData();
-insertFriendRankings()
+insertFriendRankings();
 
 function insertUserInfo() {
   const user = new User(userRepository.users[0]);

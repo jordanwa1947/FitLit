@@ -116,6 +116,21 @@ class Activity {
     return this.sortFriendSteps(friendAverageSteps)
   }
 
+//only works if records are in chronological order
+  daysWithIncreasingSteps(id) {
+    const activities = this.repoMethods.filterRecords(id, 'userID', this.activityData);
+    const stepStreaks = [];
+    for (let i = activities.length - 1; i >= 2; i--) {
+      const greaterThanDayOne = activities[i - 1].numSteps < activities[i].numSteps;
+      const greaterThanDayTwo = activities[i - 2].numSteps < activities[i].numSteps;
+      const twoGreaterThanOne = activities[i - 1].numSteps > activities[i - 2].numSteps
+      if (greaterThanDayOne && greaterThanDayTwo && twoGreaterThanOne) {
+        stepStreaks.push(activities[i]);
+      }
+    }
+    return stepStreaks;
+  }
+
 }
 
 
