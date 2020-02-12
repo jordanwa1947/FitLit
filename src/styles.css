@@ -1,105 +1,109 @@
 /* GENERAL STYLING */
 * {
-  /* background: cornflowerblue; */
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  padding-top: .5%;
 }
 
-/* STYLING FOR HEADER */
+body {
+	background: #313337;
+	font-family: 'Open Sans', sans-serif;
+}
+
+header, section {
+	background: #fff;
+}
+
+section {
+	border-radius: 4px;
+	box-shadow: 4px 4px 2px 2px rgba(0, 0, 0, 0.75);
+	height: 20rem;
+	padding: 1% 5%;
+}
+
 header {
-  background: #fff;
-  display: flex;
-  height: 20vh;
+	display: flex;
+	justify-content: space-between;
+	padding: 0 2%;
 }
 
-header section {
-  width: 30%;
+h1 {
+	margin-bottom: 2%;
 }
 
-/* STYLIING FOR MAIN */
+span {
+	color: #f47517;
+	font-weight: lighter;
+}
+
+
+div {
+	display: flex;
+	justify-content: flex-start;
+	width: 18%;
+}
+
+img {
+	margin-top: 8%;
+	height: 3rem;
+	width: auto;
+}
+
+h2 {
+	margin-left: 8%;
+}
+
 main {
 	display: grid;
-	grid-template-columns: .10fr 1fr 1fr 1fr;
-	grid-template-rows: .10fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 	grid-template-areas:
-		" . h2-1 h2-2 ."
-		"h3-1 sec-1 sec-2 aside"
-		"h3-2 sec-3 sec-4 aside"
-		"h3-3 sec-5 sec-6 aside";
-	height: 80vh;
-	grid-gap: 20px;
-  padding: 0 2% 1%;
+		"user-info activity-today friends"
+		"water-week water-week friends"
+		"sleep-week sleep-week water-today"
+		"sleep-today community community"
+		"all-steps activity-week .";
+	grid-gap: .5% 1.5%;
+	margin-top: 3%;
+	padding: 0 2%;
+};
+
+.user-info {
+	grid-area: user-info;
 }
 
-main h3 {
-  margin-top: 5%;
+.activities {
+	grid-area: activity-today;
 }
 
-.header-today {
-	grid-area: h2-1;
+.friend-rankings {
+	grid-area: friends;
+	height: 42.5rem;
 }
 
-.header-this-week {
-	grid-area: h2-2;
+.water-over-week {
+	grid-area: water-week;
 }
 
-.activity-section-1 {
-  background: gray;
-	grid-area: sec-1;
+.sleep-data-over-a-week {
+	grid-area: sleep-week;
 }
 
-.activity-section-2 {
-  background: gray;
-	grid-area: sec-2;
+.user-sleep-data {
+	grid-area: sleep-today;
 }
 
-.hydration-section-1 {
-  background: gray;
-	grid-area: sec-3;
+.activity-community-comparison {
+	grid-area: community;
 }
 
-.hydration-section-2 {
-  background: gray;
-	grid-area: sec-4;
+.days-exceeding-all-steps {
+	grid-area: all-steps;
+	width: 130%;
 }
 
-.sleep-section-1 {
-  background: gray;
-	grid-area: sec-5;
-}
-
-.sleep-section-2{
-  background: gray;
-	grid-area: sec-6;
-}
-
-aside {
-	background: gray;
-	grid-area: aside;
-}
-
-.header-activity {
-	grid-area: h3-1;
-	transform: rotate(270deg);
-	margin-top: 100px;
-}
-
-.header-hydration {
-	transform: rotate(270deg);
-	margin-top: 100px;
-	grid-area: h3-2;
-}
-
-.header-sleep {
-	transform: rotate(270deg);
-	margin-top: 100px;
-	grid-area: h3-3;
-}
-
-/* STYLING FOR ASIDE */
-
-aside h3 {
-  margin: 0;
+.activities-over-week {
+	grid-area: activity-week;
+	margin-left: 40%;
+	width: 155%;
 }
