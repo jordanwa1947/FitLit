@@ -1,8 +1,10 @@
 const userRepository = new UserRepository(userData);
 const currentUser = chooseCurrentUser();
 insertUserInfo();
-insertHydrationData();
+insertUserHydrationData();
+insertWeekHydrationData();
 insertSleepData();
+insertSleepDataForAWeek();
 insertActivityData();
 insertFriendRankings();
 insertStepStreakDays();
@@ -23,16 +25,6 @@ function insertUserInfo() {
   document.getElementById('user-stride-length').innerText = `Stride Length: ${user.strideLength}`;
   document.getElementById('daily-step-goal').innerText = `Daily Step Goal: ${user.dailyStepGoal}`;
   document.getElementById('avg-step-goal').innerText = `Average Steps: ${userRepository.calculateAvgStepGoalOfUsers()}`;
-}
-
-function formatSleepDataForAWeek() {
-  const sleep = new Sleep(sleepData, userRepository.repoMethods());
-  const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
-  return sleepDataForAWeek.reduce((string, record) => {
-    string += `<p>${record.date}</p>`
-    string += `<p>Hours Slept: ${record.hoursSlept} Quality: ${record.sleepQuality}</p>`
-    return string;
-  }, '');
 }
 
 function formatGeneralSleepData() {
@@ -88,14 +80,32 @@ function formatCommunityActivity() {
           <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
 }
 
-function formatHydrationDataForAWeek() {
+function createCoordinates(records, metric) {
+  const xCoordDates = [];
+  const yCoordOunces = [];
+  records.forEach(record => {
+    xCoordDates.push(record.date);
+    yCoordOunces.push(record[metric]);
+  });
+  return {
+    x: xCoordDates,
+    y: yCoordOunces,
+  }
+}
+
+function insertWeekHydrationData() {
   const hydration = new Hydration(hydrationData, userRepository.repoMethods());
   const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
-  return hydrationDataForAWeek.reduce((string, record) => {
-    string += `<p>${record.date}</p>`
-    string += `<p>Ounces: ${record.numOunces}</p>`
-    return string;
-  }, '<p>Ounces For Each Day:</p>');
+  const waterGraphCoords = createCoordinates(hydrationDataForAWeek, 'numOunces');
+  waterGraphCoords.name = 'Ounces Drank';
+  waterGraphCoords.mode = 'lines';
+  const data = [ waterGraphCoords ];
+  const layout = {
+    title:'Ounces Consumed For Each Day',
+    width: 750,
+    height: 300
+  };
+  Plotly.newPlot('water-over-a-week', data, layout);
 }
 
 function formatUserHydrationData() {
@@ -106,18 +116,32 @@ function formatUserHydrationData() {
           <p>Your Average: ${avgOunces}</p>`
 }
 
-function insertHydrationData() {
+function insertUserHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
-  const waterOverAWeek = document.getElementById('water-over-a-week');
   waterConsumed.innerHTML = formatUserHydrationData();
-  waterOverAWeek.innerHTML = formatHydrationDataForAWeek();
+}
+
+function insertSleepDataForAWeek() {
+  const sleep = new Sleep(sleepData, userRepository.repoMethods());
+  const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
+  const hoursSleptCoords = createCoordinates(sleepDataForAWeek, 'hoursSlept');
+  const sleepQualCoords = createCoordinates(sleepDataForAWeek, 'sleepQuality');
+  hoursSleptCoords.name = 'Hours Slept';
+  hoursSleptCoords.mode = 'lines';
+  sleepQualCoords.name = 'Sleep Quality';
+  sleepQualCoords.mode = 'lines';
+  const data = [ sleepQualCoords, hoursSleptCoords ];
+  const layout = {
+    title:'Sleep Quality And Hours Slept',
+    width: 700,
+    height: 300
+  };
+  Plotly.newPlot('sleep-data-over-a-week', data, layout);
 }
 
 function insertSleepData() {
   const sleepDataBox = document.getElementById('user-sleep-data');
-  const sleepOverAWeekBox = document.getElementById('sleep-data-over-a-week');
   sleepDataBox.innerHTML = formatGeneralSleepData();
-  sleepOverAWeekBox.innerHTML = formatSleepDataForAWeek();
 }
 
 function insertActivityData() {
