@@ -8,7 +8,7 @@ insertFriendRankings()
 
 function insertUserInfo() {
   const user = new User(userRepository.users[0]);
-  const title = `Let's get fit, ${user.getUserFirstName()}!`
+  const title = `Hi, ${user.getUserFirstName()}!`
   document.getElementById('get-fit-title').innerText = title;
   document.getElementById('user-name').innerText = `Username: ${user.name}`;
   document.getElementById('user-id').innerText = `User Id: ${user.id}`;
