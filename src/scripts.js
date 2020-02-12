@@ -172,12 +172,12 @@ function insertFriendRankings() {
   const friendsAndAverages = findFriendAverages();
   const rankingContainer = document.getElementById('friend-rankings');
   const html = friendsAndAverages.reduce((string, friend, index) => {
-    string += `<p>${friend[0].name}</p>`;
+    string += `<p><span>${friend[0].name}</span></p>`;
     string += `<p>Average: ${friend[1]}</p>`
     string += `<p>Rank: ${Number.parseInt(index) + 1}</p>`;
     return string
   }, ``)
-  rankingContainer.innerHTML = html;
+  rankingContainer.innerHTML = `<h3>Steps Ranking</h3>` + html;
 }
 
 function formatStreakDays() {
