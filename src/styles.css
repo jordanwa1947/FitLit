@@ -142,6 +142,22 @@ main {
 	grid-area: water-week;
 }
 
+#water-consumed h3,
+#water-consumed p {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+#water-consumed img {
+  height: 50%;
+  margin: 5% 0 5% 30%;
+  width: auto;
+}
+
+#water-consumed p {
+  font-size: 1.2em;
+}
+
 #sleep-data-over-a-week {
 	grid-area: sleep-week;
 }
