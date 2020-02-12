@@ -1,5 +1,5 @@
 const userRepository = new UserRepository(userData);
-const currentUser = userRepository.users[0];
+const currentUser = chooseCurrentUser();
 insertUserInfo();
 insertHydrationData();
 insertSleepData();
@@ -7,8 +7,13 @@ insertActivityData();
 insertFriendRankings();
 insertStepStreakDays();
 
+function chooseCurrentUser() {
+  const randIndex = Math.floor(Math.random() * userData.length);
+  return userData[randIndex];
+}
+
 function insertUserInfo() {
-  const user = new User(userRepository.users[0]);
+  const user = new User(currentUser);
   const title = `Hi, ${user.getUserFirstName()}!`
   document.getElementById('get-fit-title').innerText = title;
   document.getElementById('user-name').innerText = `${user.name}`;
