@@ -82,9 +82,11 @@ function insertHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
   const waterOverAWeek = document.getElementById('water-over-a-week');
   const hydration = new Hydration(hydrationData, userRepository.repoMethods());
+  const avgOunces = hydration.calcAvgOuncesConsumedForAllTime(currentUser.id);
   const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
   const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
-  waterConsumed.innerHTML = `<p>Ounces Drank: ${todaysHydrationData}</p>`
+  waterConsumed.innerHTML = `<p>Ounces Drank: ${todaysHydrationData}</p>
+                             <p>Your Average: ${avgOunces}</p>`
   waterOverAWeek.innerHTML = formatHydrationDataForAWeek(hydrationDataForAWeek)
 }
 
