@@ -63,7 +63,7 @@ function formatActivityDataForWeek() {
   const averageMinutesActiveForWeek = activity.findAverageMinutesActiveForWeek(currentUser.id, '2019/09/22');
   const averageStepsTakenForWeek = activity.findAverageStepsTakenForWeek(currentUser.id, '2019/09/22');
   const averageStairsClimbedForWeek = activity.findAverageStairsClimbedForWeek(currentUser.id, '2019/09/22');
-  return `<h3>Here are your stats for this week...</h3>
+  return `<h3>Here are your averages for this week...</h3>
   <div id="display-activities-over-week">
     <div>
       <img src="../assets/019-runner.svg" alt="sneaker-icon">
