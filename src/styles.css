@@ -142,6 +142,10 @@ main {
 	grid-area: water-week;
 }
 
+#water-consumed {
+  grid-area: water-today;
+}
+
 #water-consumed h3,
 #water-consumed p {
   font-size: 1.3em;
