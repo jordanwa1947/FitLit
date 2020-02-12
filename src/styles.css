@@ -135,8 +135,25 @@ main {
 }
 
 #friend-rankings {
+  background: url('../assets/gold-medal.svg') 20px 95px/ 60px auto no-repeat white;
 	grid-area: friends;
 	height: 42.5rem;
+}
+
+#friend-rankings h3 {
+  color: #f47517;
+  font-size: 2em;
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+#friend-rankings p {
+  font-size: 1em;
+  margin: 2% 0 0 15%;
+}
+
+#friend-rankings p span {
+  font-style: italic;
 }
 
 #water-over-a-week {
