@@ -63,9 +63,21 @@ function formatActivityDataForWeek() {
   const averageMinutesActiveForWeek = activity.findAverageMinutesActiveForWeek(currentUser.id, '2019/09/22');
   const averageStepsTakenForWeek = activity.findAverageStepsTakenForWeek(currentUser.id, '2019/09/22');
   const averageStairsClimbedForWeek = activity.findAverageStairsClimbedForWeek(currentUser.id, '2019/09/22');
-  return `<p>Average Minutes Active This Week: ${averageMinutesActiveForWeek}</p>
-          <p>Average Steps Taken This Week: ${averageStepsTakenForWeek}</p>
-          <p>Average Stairs Cimbed This Week: ${averageStairsClimbedForWeek}</p>`;
+  return `<h3>Here are your stats for this week...</h3>
+  <div id="display-activities-over-week">
+    <div>
+      <img src="../assets/019-runner.svg" alt="sneaker-icon">
+      <p>Minutes Active ${averageMinutesActiveForWeek}</p>
+    </div>
+    <div>
+      <img src="../assets/footprints.svg" alt="steps icon">
+      <p>Steps Taken ${averageStepsTakenForWeek}</p>
+    </div>
+    <div>
+      <img src="../assets/step.svg" alt="climbing stairs icon">
+      <p>Stairs Cimbed ${averageStairsClimbedForWeek}</p>
+    <div>
+  </div>`;
 }
 
 function formatCommunityActivity() {
