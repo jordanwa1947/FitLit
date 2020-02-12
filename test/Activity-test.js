@@ -184,4 +184,8 @@ describe('Activity', function() {
     const streakActivity = activity.daysWithIncreasingSteps(4)
     expect(streakActivity[0].date).to.equal("2019/06/19");
   });
+
+  it('should calculate the percentage that a user has met their step goal', function () {
+    expect(activity.percentStepGoalWasMet(4, 4000)).to.equal('62.50');
+  })
 });
