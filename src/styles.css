@@ -106,6 +106,7 @@ main {
 #days-exceeding-all-steps {
 	grid-area: all-steps;
 	width: 140%;
+  overflow: scroll;
 }
 
 #activities-over-week {
