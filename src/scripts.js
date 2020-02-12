@@ -30,12 +30,13 @@ function insertUserInfo() {
 function formatGeneralSleepData() {
   const sleep = new Sleep(sleepData, userRepository.repoMethods());
   const userSleepData = sleep.findUserSleepData(currentUser.id, '2019/09/22');
-  const avgHoursSlept = sleep.findAverageForAUser(currentUser.id, 'hoursSlept');
-  const avgSleepQuality = sleep.findAverageForAUser(currentUser.id, 'sleepQuality');
-  return `<p>Hours Slept: ${userSleepData.hoursSlept}</p>
-          <p>Quality: ${userSleepData.sleepQuality}</p>
-          <p>Average Hours Slept: ${avgHoursSlept}</p>
-          <p>Average Sleep Quality: ${avgSleepQuality}</p>`
+  const avgHoursSlept = sleep.findAverageForAUser(currentUser.id, 'hoursSlept').toFixed(1);
+  const avgSleepQuality = sleep.findAverageForAUser(currentUser.id, 'sleepQuality').toFixed(1);
+  return `<h3>Zzzz...</h3>
+          <p>Hours Slept: <span>${userSleepData.hoursSlept}</span></p>
+          <p>Quality: <span>${userSleepData.sleepQuality}</span></p>
+          <p>Average Hours Slept: <span>${avgHoursSlept}</span></p>
+          <p>Average Sleep Quality: <span>${avgSleepQuality}</span></p>`
 }
 
 function formatGeneralActivityData() {
