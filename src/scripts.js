@@ -24,14 +24,6 @@ function insertUserInfo() {
   document.getElementById('avg-step-goal').innerText = `Average Step Goal: ${userRepository.calculateAvgStepGoalOfUsers()}`;
 }
 
-function formatHydrationDataForAWeek(records) {
-  return records.reduce((string, record) => {
-    string += `<p>${record.date}</p>`
-    string += `<p>Ounces: ${record.numOunces}</p>`
-    return string;
-  }, '<p>Ounces For Each Day:</p>');
-}
-
 function formatSleepDataForAWeek() {
   const sleep = new Sleep(sleepData, userRepository.repoMethods());
   const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
@@ -83,16 +75,29 @@ function formatCommunityActivity() {
           <p>Our users averaged ${averageStairsClimbedForAllusers} stairs climbed on this day.</p>`;
 }
 
+function formatHydrationDataForAWeek() {
+  const hydration = new Hydration(hydrationData, userRepository.repoMethods());
+  const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
+  return hydrationDataForAWeek.reduce((string, record) => {
+    string += `<p>${record.date}</p>`
+    string += `<p>Ounces: ${record.numOunces}</p>`
+    return string;
+  }, '<p>Ounces For Each Day:</p>');
+}
+
+function formatUserHydrationData() {
+  const hydration = new Hydration(hydrationData, userRepository.repoMethods());
+  const avgOunces = hydration.calcAvgOuncesConsumedForAllTime(currentUser.id);
+  const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
+  return `<p>Ounces Drank: ${todaysHydrationData}</p>
+          <p>Your Average: ${avgOunces}</p>`
+}
+
 function insertHydrationData() {
   const waterConsumed = document.getElementById('water-consumed');
   const waterOverAWeek = document.getElementById('water-over-a-week');
-  const hydration = new Hydration(hydrationData, userRepository.repoMethods());
-  const avgOunces = hydration.calcAvgOuncesConsumedForAllTime(currentUser.id);
-  const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
-  const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
-  waterConsumed.innerHTML = `<p>Ounces Drank: ${todaysHydrationData}</p>
-                             <p>Your Average: ${avgOunces}</p>`
-  waterOverAWeek.innerHTML = formatHydrationDataForAWeek(hydrationDataForAWeek)
+  waterConsumed.innerHTML = formatUserHydrationData();
+  waterOverAWeek.innerHTML = formatHydrationDataForAWeek();
 }
 
 function insertSleepData() {
