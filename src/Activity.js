@@ -131,7 +131,7 @@ class Activity {
     return stepStreaks;
   }
 
-  percentageOfDaysStepGoalWasAchieved(id, goal) {
+  percentStepGoalWasMet(id, goal) {
     const userActivities = this.repoMethods.filterRecords(id, 'userID', this.activityData);
     const activities = userActivities.filter((activity) => {
       return activity.numSteps >= goal;

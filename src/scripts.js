@@ -6,6 +6,7 @@ insertSleepData();
 insertActivityData();
 insertFriendRankings();
 insertStepStreakDays();
+insertPercentageStepGoalMet()
 
 function chooseCurrentUser() {
   const randIndex = Math.floor(Math.random() * userData.length);
@@ -154,4 +155,11 @@ function insertStepStreakDays() {
   const streakHTML = formatStreakDays();
   const allStepsBox = document.getElementById('days-exceeding-all-steps');
   allStepsBox.insertAdjacentHTML('beforeend', streakHTML);
+}
+
+function insertPercentageStepGoalMet() {
+  const percentage = document.getElementById('percentage-goal-met');
+  const activity = new Activity(activityData, userRepository.repoMethods());
+  const percent = activity.percentStepGoalWasMet(currentUser.id, currentUser.dailyStepGoal);
+  percentage.innerText = `You've met your step goal: ${percent}%`;
 }
