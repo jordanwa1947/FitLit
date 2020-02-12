@@ -179,4 +179,9 @@ describe('Activity', function() {
     expect(activity.findAverageMinutesActiveForDay("2019/06/15")).to.equal(164)
     expect(activity.findAverageMinutesActiveForDay("2019/06/16")).to.equal(186);
   });
+
+  it('should find days with a 3 or more day streak of increasing steps', function() {
+    const streakActivity = activity.daysWithIncreasingSteps(4)
+    expect(streakActivity[0].date).to.equal("2019/06/19");
+  });
 });
