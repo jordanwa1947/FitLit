@@ -90,7 +90,8 @@ main {
   width: 10em;
 }
 
-.user-info h3 {
+.user-info h3,
+#activities-over-week h3 {
   color: #f47517;
   font-size: 2em;
   font-style: italic;
@@ -162,5 +163,38 @@ main {
 #activities-over-week {
 	grid-area: activity-week;
 	margin-left: 40%;
+  padding: 5% 10%;
 	width: 165%;
+}
+
+#activities-over-week h3 {
+margin: 0;
+}
+
+#activities-over-week #display-activities-over-week {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 4.5%;
+  height: 80%;
+  width: 100%;
+}
+
+#display-activities-over-week div {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.01em;
+  padding: 6%;
+  text-align: center;
+  width: 30%;
+}
+
+#display-activities-over-week img {
+  width: 5em;
+  height: 5em;
+  margin-left: 10%;
+  margin-bottom: 20%;
+}
+
+#display-activities-over-week img:last {
+  margin-bottom: 30%;
 }
