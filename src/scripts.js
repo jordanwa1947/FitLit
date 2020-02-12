@@ -5,6 +5,7 @@ insertHydrationData();
 insertSleepData();
 insertActivityData();
 insertFriendRankings();
+insertStepStreakDays();
 
 function insertUserInfo() {
   const user = new User(userRepository.users[0]);
@@ -124,4 +125,21 @@ function insertFriendRankings() {
     return string
   }, ``)
   rankingContainer.innerHTML = html;
+}
+
+function formatStreakDays() {
+  const activity = new Activity(activityData, userRepository.repoMethods());
+  const streakActivities = activity.daysWithIncreasingSteps(currentUser.id);
+  const html = streakActivities.reduce((string, activity) => {
+    string += `<p>${activity.date}</p>`;
+    string += `<p>Steps: ${activity.numSteps}</p>`;
+    return string
+  }, ``)
+  return html;
+}
+
+function insertStepStreakDays() {
+  const streakHTML = formatStreakDays();
+  const allStepsBox = document.getElementById('days-exceeding-all-steps');
+  allStepsBox.insertAdjacentHTML('beforeend', streakHTML);
 }
