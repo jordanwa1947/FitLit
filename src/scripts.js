@@ -4,6 +4,7 @@ insertUserInfo();
 insertUserHydrationData();
 insertWeekHydrationData();
 insertSleepData();
+insertSleepDataForAWeek();
 insertActivityData();
 insertFriendRankings();
 insertStepStreakDays();
@@ -24,16 +25,6 @@ function insertUserInfo() {
   document.getElementById('user-stride-length').innerText = `Stride Length: ${user.strideLength}`;
   document.getElementById('daily-step-goal').innerText = `Daily Step Goal: ${user.dailyStepGoal}`;
   document.getElementById('avg-step-goal').innerText = `Average Steps: ${userRepository.calculateAvgStepGoalOfUsers()}`;
-}
-
-function formatSleepDataForAWeek() {
-  const sleep = new Sleep(sleepData, userRepository.repoMethods());
-  const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
-  return sleepDataForAWeek.reduce((string, record) => {
-    string += `<p>${record.date}</p>`
-    string += `<p>Hours Slept: ${record.hoursSlept} Quality: ${record.sleepQuality}</p>`
-    return string;
-  }, '');
 }
 
 function formatGeneralSleepData() {
@@ -129,11 +120,27 @@ function insertUserHydrationData() {
   waterConsumed.innerHTML = formatUserHydrationData();
 }
 
+function insertSleepDataForAWeek() {
+  const sleep = new Sleep(sleepData, userRepository.repoMethods());
+  const sleepDataForAWeek = sleep.findSleepDataForAWeek(currentUser.id, '2019/09/22');
+  const hoursSleptCoords = createCoordinates(sleepDataForAWeek, 'hoursSlept');
+  const sleepQualCoords = createCoordinates(sleepDataForAWeek, 'sleepQuality');
+  hoursSleptCoords.name = 'Hours Slept';
+  hoursSleptCoords.mode = 'lines';
+  sleepQualCoords.name = 'Sleep Quality';
+  sleepQualCoords.mode = 'lines';
+  const data = [ sleepQualCoords, hoursSleptCoords ];
+  const layout = {
+    title:'Sleep Quality And Hours Slept',
+    width: 700,
+    height: 300
+  };
+  Plotly.newPlot('sleep-data-over-a-week', data, layout);
+}
+
 function insertSleepData() {
   const sleepDataBox = document.getElementById('user-sleep-data');
-  const sleepOverAWeekBox = document.getElementById('sleep-data-over-a-week');
   sleepDataBox.innerHTML = formatGeneralSleepData();
-  sleepOverAWeekBox.innerHTML = formatSleepDataForAWeek();
 }
 
 function insertActivityData() {
