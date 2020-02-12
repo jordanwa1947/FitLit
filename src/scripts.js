@@ -97,10 +97,11 @@ function insertWeekHydrationData() {
   const hydration = new Hydration(hydrationData, userRepository.repoMethods());
   const hydrationDataForAWeek = hydration.findHydrationDataForAWeek(currentUser.id, '2019/09/22');
   const waterGraphCoords = createCoordinates(hydrationDataForAWeek, 'numOunces');
+  waterGraphCoords.name = 'Ounces Drank';
   waterGraphCoords.mode = 'lines';
   const data = [ waterGraphCoords ];
   const layout = {
-    title:'Water Week',
+    title:'Ounces Consumed For Each Day',
     width: 750,
     height: 300
   };
