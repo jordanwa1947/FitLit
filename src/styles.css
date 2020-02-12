@@ -100,11 +100,11 @@ main {
 
 #days-exceeding-all-steps {
 	grid-area: all-steps;
-	width: 130%;
+	width: 140%;
 }
 
 #activities-over-week {
 	grid-area: activity-week;
 	margin-left: 40%;
-	width: 155%;
+	width: 165%;
 }
