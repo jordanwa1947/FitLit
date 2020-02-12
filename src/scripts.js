@@ -113,8 +113,10 @@ function formatUserHydrationData() {
   const hydration = new Hydration(hydrationData, userRepository.repoMethods());
   const avgOunces = hydration.calcAvgOuncesConsumedForAllTime(currentUser.id);
   const todaysHydrationData = hydration.displayFluidOuncesConsumed(currentUser.id, '2019/09/22')
-  return `<p>Ounces Drank: ${todaysHydrationData}</p>
-          <p>Your Average: ${avgOunces}</p>`
+  return `<h3>Today's Hydration Stats</h3>
+          <img src="../assets/008-water.svg" alt="glass of water">
+          <p>${todaysHydrationData} oz</p>
+          <p>Your Daily Average: ${avgOunces} oz</p>`
 }
 
 function insertUserHydrationData() {
