@@ -3,6 +3,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+
 }
 
 body {
@@ -72,37 +73,37 @@ main {
 	grid-area: user-info;
 }
 
-.activities {
+#activities {
 	grid-area: activity-today;
 }
 
-.friend-rankings {
+#friend-rankings {
 	grid-area: friends;
 	height: 42.5rem;
 }
 
-.water-over-week {
+#water-over-a-week {
 	grid-area: water-week;
 }
 
-.sleep-data-over-a-week {
+#sleep-data-over-a-week {
 	grid-area: sleep-week;
 }
 
-.user-sleep-data {
+#user-sleep-data {
 	grid-area: sleep-today;
 }
 
-.activity-community-comparison {
+#activity-community-comparison {
 	grid-area: community;
 }
 
-.days-exceeding-all-steps {
+#days-exceeding-all-steps {
 	grid-area: all-steps;
 	width: 130%;
 }
 
-.activities-over-week {
+#activities-over-week {
 	grid-area: activity-week;
 	margin-left: 40%;
 	width: 155%;
