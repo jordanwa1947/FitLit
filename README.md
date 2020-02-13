@@ -4,7 +4,7 @@
 FitLit is an activity tracker that shows a user's individual activity/fitness data, along with that user's data in relation to a database of other user's fitness/data. A major focus of this project was creating classes and testing those classes via test driven development.
 
 ## Screenshots of the App
- _The styling for some of the cards aren't styled, see "Issues/ Like to Have"_
+ _The styling for some of the cards aren't completed, see "Issues/ Like to Have"_
 
 ![screencapture-file-Users-tanishadavey-Desktop-turing-mod-2-projects-FitLit-src-index-html-2020-02-12-16_54_33](https://user-images.githubusercontent.com/41553045/74388360-7629e600-4db8-11ea-95b5-ee72ba8bf50d.png)
 
