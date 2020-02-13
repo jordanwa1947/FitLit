@@ -1,7 +1,7 @@
 # FitLit Activity Tracker
 #### Contibutors: [Jordan Whitten](https://github.com/jordanwa1947) & [Tanisha L. Davey](https://github.com/jordanwa1947/FitLit/commits?author=tanishalatoya)
 ## Abstract
-FitLit is an activity tracker that shows a user's individual activity/fitness data, along with that user's data in relation to a database of other user's fitness/data. A major focus of this project was creating classes and testing those classes via test driven development.
+FitLit is an activity tracker that shows a user's individual activity/fitness data, along with that user's data in relation to a database of other user's fitness/data. A major focus of this project was creating classes and testing those classes via test driven development. The tech stack for this application includes: Javascript, Mocha, Chai, and Plottly.js.
 
 ## Screenshots of the App
  _The styling for some of the cards aren't completed, see "Issues/ Like to Have"_
