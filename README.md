@@ -1,5 +1,5 @@
 # FitLit Activity Tracker
-
+#### Contibutors: [Jordan Whitten](https://github.com/jordanwa1947) & [Tanisha L. Davey](https://github.com/jordanwa1947/FitLit/commits?author=tanishalatoya)
 ## Abstract
 FitLit is an activity tracker that shows a user's individual activity/fitness data, along with that user's data in relation to a database of other user's fitness/data. A major focus of this project was creating classes and testing those classes via test driven development.
 
